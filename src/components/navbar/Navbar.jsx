@@ -1,88 +1,82 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './navbar.css';
 
 const Navbar = () => {
     return (
-        <nav className="navbar navbar-expand-lg bg-body-tertiary ">
+        <nav className="header navbar navbar-expand-lg ">
             <div className="container-fluid">
-                <a className="navbar-brand" href="#">
-                    Navbar
-                </a>
+                
+                <Link className="navbar-brand" to="#">
+                    <h1 className='navbar_head'>
+                        turf_hub
+                        <small className='navbar_head-small'>Get on the field faster</small>
+                    </h1>
+                </Link>
                 <button
                     className="navbar-toggler"
                     type="button"
                     data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent"
-                    aria-expanded="true"
+                    aria-expanded="false"
                     aria-label="Toggle navigation"
                 >
                     <span className="navbar-toggler-icon" />
                 </button>
-                <div className="collapse navbar-collapse " id="navbarSupportedContent">
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="#">
+                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul className="navbar-nav  mb-2 mb-lg-0">
+                        <li className="nav-link">
+                            <Link className="nav-link active text-white me-lg-2" aria-current="page" to="#">
                                 Home
-                            </a>
+                            </Link>
                         </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">
-                                Link
-                            </a>
+                        <li className="nav-link me-2">
+                            <Link className="nav-link text-white" to="#">
+                                Courts
+                            </Link>
                         </li>
-                        <li className="nav-item dropdown">
-                            <a
-                                className="nav-link dropdown-toggle"
-                                href="#"
+                        <li className=" nav-link dropdown text-white me-lg-2">
+                            <Link
+                                className="nav-link dropdown-toggle text-white"
+                                to="#"
                                 role="button"
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false"
                             >
                                 Dropdown
-                            </a>
+                            </Link>
                             <ul className="dropdown-menu">
                                 <li>
-                                    <a className="dropdown-item" href="#">
+                                    <Link className="dropdown-item" to="#">
                                         Action
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li>
-                                    <a className="dropdown-item" href="#">
+                                    <Link className="dropdown-item" to="#">
                                         Another action
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li>
                                     <hr className="dropdown-divider" />
                                 </li>
                                 <li>
-                                    <a className="dropdown-item" href="#">
+                                    <Link className="dropdown-item" to="#">
                                         Something else here
-                                    </a>
+                                    </Link>
                                 </li>
                             </ul>
                         </li>
-                        <li className="nav-item">
-                            <a className="nav-link disabled" aria-disabled="true">
-                                Disabled
-                            </a>
+                        <li className="nav-link">
+                            <span className="text-bg-danger btn" aria-disabled="true">
+                                Logout
+                            </span>
                         </li>
                     </ul>
-                    {/* <form className="d-flex" role="search">
-        <input
-          className="form-control me-2"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-        />
-        <button className="btn btn-outline-success" type="submit">
-          Search
-        </button>
-      </form> */}
-                </div>
+                  </div>
             </div>
         </nav>
-
     );
 };
 

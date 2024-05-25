@@ -1,0 +1,41 @@
+:root{
+    --dark1:#003C43;
+    --dark2:#135D66;
+    --light1:#E3FEF7;
+    --lighr2:#E3FEF7;
+  }
+.navbar{
+    background-color:var(--dark1);
+    color: white;
+}
+.navbar_head{
+    /* background-color: rgb(21, 119, 206); */
+    height: 10px;
+}
+.navbar_head-small{
+    font-size: xx-small;
+    color: rgb(16, 187, 16);
+    font-style: italic;
+}
+.navbar_head{
+    font-size: 30px;
+    text-transform: capitalize;
+}
+.navbar-brand{
+    color: white;
+    font-style: italic;
+    height: 50px;
+}
+#navbarSupportedContent{
+    margin-left: 710px;
+    color: white !important;
+}
+.nav-link,.nav-item{
+    color:white;
+}
+@media(max-width:992px){
+    #navbarSupportedContent{
+        margin-left:0px;
+        color: white !important;
+    } 
+}

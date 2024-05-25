@@ -14,7 +14,6 @@ const AuthPage = () => {
                 <small className='h1small'>Get on the field faster</small>
                 </h1>
                 
-                {/* <img src={logo} alt="" /> */}
 
             </div>
             <div className='auth-box row '>
