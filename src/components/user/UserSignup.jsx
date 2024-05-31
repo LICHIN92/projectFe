@@ -28,6 +28,7 @@ const UserSignup = ({ setAuth }) => {
       }
     } catch (error) {
       console.log(error.response.data);
+      alert(error.response.data)
     }
      
     

@@ -8,6 +8,7 @@ import UserSignup from '../../components/user/UserSignup'
 const AuthPage = () => {
     const [auth, setAuth] = useState('signin')
     return (
+        
         <div className='auth_parent'>
             <div className='logo'>
                 <h1>turf_hub
