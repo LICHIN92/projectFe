@@ -29,3 +29,8 @@
 label{
     color: white;
 }
+.error {
+    color: rgb(255, 59, 59);
+    font-size: 0.75em;
+    margin-top: 0.15em;
+}
