@@ -161,13 +161,13 @@ const Navbar = () => {
                             </Link>
                             <ul className="dropdown-menu">
                                 <li>
-                                    <Link className="dropdown-item" to="#">
+                                    <Link className="dropdown-item" to="/">
                                         My_Booking
                                     </Link>
                                 </li>
                                 {user.role=='admin' &&
                                  <li>
-                                 <Link className="dropdown-item" to="#">
+                                 <Link className="dropdown-item" to="/addCourt">
                                      AddCourt
                                  </Link>
                              </li>

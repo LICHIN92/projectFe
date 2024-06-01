@@ -4,6 +4,9 @@
     --light1:#E3FEF7;
     --lighr2:#E3FEF7;
   }
+.header{
+    width: 100vw;
+}
 .navbar{
     background-color:var(--dark1);
     color: white;

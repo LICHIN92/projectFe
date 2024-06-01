@@ -11,6 +11,7 @@ import { Provider } from 'react-redux';
 
 import Store from './redux/Store.js';
 import HomePage from './components/homepage/HomePage.jsx';
+import AddCourt from './components/AddCourt/AddCourt.jsx';
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,9 @@ const router = createBrowserRouter([
       {
         path:'/home',
         element:<HomePage/>        
+      },{
+        path:'/addCourt',
+        element:<AddCourt/>
       }
     ])
 

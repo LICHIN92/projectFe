@@ -1,0 +1,31 @@
+
+:root{
+    --dark1:#003C43;
+    --dark2:#135D66;
+    --light1:#E3FEF7;
+    --lighr2:#E3FEF7;
+  }
+
+.checkbox{
+    background-color: bisque;
+    /* display: flex;
+    justify-content: space-around;
+    align-items: center; */
+    width: 150px;
+}
+.check{
+    margin: 3px;
+    width: 15px;
+    height: 15px;
+}
+.label{
+    /* background-color: blueviolet; */
+}
+.addcourt{
+    background-color:#006769;
+    padding-block: 10px;
+    
+}
+label{
+    color: white;
+}
