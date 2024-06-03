@@ -48,3 +48,8 @@
         color: white !important;
     } 
 }
+@media(max-width:350px){
+    .navbar_head{
+        font-size:larger;
+    }
+  }
