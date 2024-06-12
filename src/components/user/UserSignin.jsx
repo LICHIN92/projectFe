@@ -43,10 +43,10 @@ const UserSignin = ({ setAuth }) => {
                 {errors.email && <span className=' text-danger'>Email feild is required</span>}
                 <input type="password" {...register("password", { required: true })} placeholder='Password' />
                 {errors.password && <span className=' text-danger '>Password feild is required</span>}
-                <input className='text-uppercase mt-3' type="submit" />
+                <input className='text-uppercase mt-3 bt' type="submit" />
             </form>
             <hr style={{ color: "white", width: '100%' }} />
-            <button onClick={() => setAuth('signup')}>Create new account</button>
+            <button  onClick={() => setAuth('signup')}>Create new account</button>
         </div>
     )
 }

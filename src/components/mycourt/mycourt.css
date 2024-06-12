@@ -1,0 +1,10 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.time-slot-select-modal {
+    width: 30rem;
+    background-color: aqua;
+}

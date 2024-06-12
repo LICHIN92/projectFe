@@ -1,34 +1,47 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { useNavigate } from 'react-router-dom';
 const HomePage = () => {
+    const [courts, setCourts] = useState([])
+    useEffect(() => {
+        const courtdata = async () => {
+            try {
+                const court = await axios.get('http://localhost:3000/court')
+                console.log(court.data);
+                setCourts(court.data)
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        courtdata();
+    }, [])
+    const navigate=useNavigate()
+    const courtdetails=async (id)=>{
+        const courtItem=await axios.get(`http://localhost:3000/court/singleCourt/${id}`)
+        console.log(courtItem);
+        navigate(`/court/${id}`,{ state: { court: courtItem.data } })
+    }
     return (
-        <div className='p-2'>
-            {/* cards */}
-            <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src="https://res.cloudinary.com/djnxobzrq/image/upload/v1716304847/xligsiicb4yrlpwshra0.webp" />
+        <div className='d-flex justify-content-center flex-wrap gap-4 pt-2'>
+        {courts.length > 0 ? courts.map((data, index) => (
+            <Card key={index} style={{ width: '15rem' }} className='text-center d-flex justify-content-center'>
+                <Card.Img style={{ width: '10rem', height: '10rem', alignSelf: 'center' }}
+                    variant="center"
+                    src={data.pics[0]} />
                 <Card.Body>
-                    <Card.Title>Card Title</Card.Title>
+                    <Card.Title>{data.CourtName}</Card.Title>
                     <Card.Text>
-                        Some quick example text to build on the card title and make up the
-                        bulk of the card's content.
+                        {/* Add any additional text or details here */}
                     </Card.Text>
-                    <Button variant="primary">Go somewhere</Button>
+                    <Button variant="secondary" onClick={()=>courtdetails(data._id)}>view court</Button>
                 </Card.Body>
             </Card>
-
-            <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src="https://res.cloudinary.com/djnxobzrq/image/upload/v1716304847/xligsiicb4yrlpwshra0.webp" />
-                <Card.Body>
-                    <Card.Title>Card Title</Card.Title>
-                    <Card.Text>
-                        Some quick example text to build on the card title and make up the
-                        bulk of the card's content.
-                    </Card.Text>
-                    <Button variant="primary">Go somewhere</Button>
-                </Card.Body>
-            </Card>
-        </div>
+        )) : 
+            <h1>No court available</h1>
+        }
+    </div>
 
     )
 }

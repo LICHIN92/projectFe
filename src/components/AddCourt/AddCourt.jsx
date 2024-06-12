@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../AddCourt/addcourt.css';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
@@ -7,7 +7,13 @@ import addimage from '../../assets/add-image-frame-svgrepo-com (1).svg'
 import close from '../../assets/close.svg.svg'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import {
+    Alert,
+    AlertIcon,
+    AlertTitle,
+    AlertDescription,
+    Stack,
+} from '@chakra-ui/react'
 const AddCourt = () => {
     const sportsOptions = [
         'Basketball',
@@ -17,19 +23,44 @@ const AddCourt = () => {
         'Badminton',
         'Hockey'
     ];
-
+    const AmenitiesOption = ['Parking', 'Washroom', 'Shower', 'Restroom', 'Wi-Fi',
+        'Drinking Water', 'First Aid', 'Locker Room', 'Change Room']
     const [selectedSports, setSelectedSports] = useState([]);
     const [selectedFiles, setSelectedFiles] = useState([]);
-    const navigate=useNavigate()
+    const [selectedAmenities, SetAmenities] = useState([])
+    const [SetPresence, setSetPresence] = useState(false);
+    const [alertbox, setAlert] = useState(null)
+    const navigate = useNavigate()
     const fileInputRef = useRef();
 
-    const handleCheckBoxChange = (sport) => {
-        const updatedSports = selectedSports.includes(sport)
-            ? selectedSports.filter((s) => s !== sport)
-            : [...selectedSports, sport];
-        setSelectedSports(updatedSports);
-        setValue('AvailableSports', updatedSports);
+    // const handleCheckBoxChange = (list,setList,item) => {
+    //     const updatedList = list.includes(item)
+    //         ? selectedSports.filter((i) => i !== item)
+    //         : [...list, item];
+    //     setList(updatedList);
+    //     if(item=== 'AvailableSports'){
+    //     setValue('AvailableSports', updatedList);
+
+    //     }else{
+    //         setValue('Amenities',updatedList)
+    //     }
+    // };
+
+
+    const handleCheckBoxChange = (list, setList, item) => {
+        const updatedList = list.includes(item)
+            ? list.filter((i) => i !== item)
+            : [...list, item];
+        setList(updatedList);
     };
+
+    useEffect(() => {
+        setValue('AvailableSports', selectedSports);
+    }, [selectedSports]);
+
+    useEffect(() => {
+        setValue('Amenities', selectedAmenities);
+    }, [selectedAmenities]);
 
     const handleAddIconClick = () => {
         if (fileInputRef.current) {
@@ -47,11 +78,11 @@ const AddCourt = () => {
         });
     };
 
-  const remover=(index)=>{
-    setSelectedFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
+    const remover = (index) => {
+        setSelectedFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
 
 
-  }
+    }
 
     const schema = yup.object({
         CourtName: yup.string().required('Please add Court Name'),
@@ -61,13 +92,16 @@ const AddCourt = () => {
         AddressLine2: yup.string().min(3).required('Please provide Address Line 2'),
         AddressLine3: yup.string().min(3).required('Please provide Address Line 3'),
         Landmark: yup.string().min(3).required('Please provide Landmark'),
-        CourtType: yup.string().min(3).required('Please provide Court Type')
+        CourtType: yup.string().min(3).required('Please provide Court Type'),
+        Price: yup.number().required('Price is required').positive('Price must be a positive number').integer(),
+        files: yup.array().required('Please upload at least one file'),
+        AvailableSports: yup.array().required('select available Sports')
     });
 
     const { register, handleSubmit, setValue, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
 
     const onSubmit = async (data) => {
-        // data.availableSports = selectedSports;
+        console.log('data');
         data.files = selectedFiles;
         try {
             const formData = new FormData();
@@ -80,26 +114,55 @@ const AddCourt = () => {
                     formData.append(key, value);
                 }
             });
-            
-            console.log(data);
-           const response= await axios.post("http://localhost:3000/admin", formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data"
+
+            if (selectedSports.length > 0) {
+                console.log(selectedFiles.length);
+                if (selectedFiles.length > 0) {
+                    console.log(data);
+                    const token = localStorage.getItem('token');
+                    const response = await axios.post("http://localhost:3000/admin", formData, {
+                        headers: {
+                            "Content-Type": "multipart/form-data",
+                            "Authorization": `Bearer ${token}`
+                        }
+                    });
+                    console.log(response);
+                    setAlert({
+                        status: 'success',
+                        title: 'Success!',
+                        description: response.data.data
+                    });
+                    setTimeout(() => navigate('/home'), 3000)
+                } else {
+                    alert('please select court Images')
                 }
-            });
-            console.log(response);
-            alert(response.data.data)
-            navigate('/home')
-           
+            } else {
+                alert('select sport')
+
+            }
+
         } catch (error) {
             console.log(error);
+            alert(error.response.data)
+
         }
     };
 
     return (
-        <div className='container-fluid addcourt p-2'>
-            <div className='row p-0 p-md-3'>
-                <h1>Add New Court</h1>
+        <div className='container-fluid addcourt p-md-2'>
+            <div className='row p-sm-1  p-md-3 '>
+                <h1 className='add_heading'>Add New Court</h1>
+
+                {alertbox && (
+                    <Stack spacing={3} mb={4}>
+                        <Alert status={alertbox.status} variant='subtle'>
+                            <AlertIcon />
+                            <AlertTitle>{alertbox.title}</AlertTitle>
+                            <AlertDescription>{alertbox.description}</AlertDescription>
+                        </Alert>
+                    </Stack>
+                )}
+
                 <form onSubmit={handleSubmit(onSubmit)} className='row px-lg-5 ms-sm-3 px-md-3'>
                     <div className='d-flex flex-column col-md-6 col-lg-4 my-2'>
                         <label htmlFor="courtname">Court Name</label>
@@ -141,44 +204,78 @@ const AddCourt = () => {
                         <input type="text" {...register('CourtType')} id='courttype' placeholder='Court Type' />
                         {errors.CourtType && <small className="error">{errors.CourtType.message}</small>}
                     </div>
+                    <div className='d-flex flex-column col-md-6 col-lg-4 my-2'>
+                        <label htmlFor="price">Price/Hrs</label>
+                        <input type="number" {...register('Price')} id='price' placeholder='Price' />
+                        {errors.Price && <small className="error">{errors.Price.message}</small>}
+                    </div>
                     <div className='d-flex flex-column my-2'>
                         <label>Sports Available</label>
-                        <div className='row ms-1'>
+                        <div className='row ms-1 mt-2 row-gap-1'>
                             {sportsOptions.map((sport, index) => (
                                 <div key={index} className='checkbox '>
                                     <input type="checkbox" id={`${sport}`} className='check'
                                         checked={selectedSports.includes(sport)}
-                                        onChange={() => handleCheckBoxChange(sport)} />
+                                        onChange={() => handleCheckBoxChange(selectedSports, setSelectedSports, sport)}
+                                    />
                                     <label htmlFor={sport} className='label'>{sport}</label>
                                 </div>
                             ))}
                         </div>
+                        {selectedSports.length === 0 && <small className="error">Please select at least one sport</small>}
+
                     </div>
-                    <div className='d-flex flex-column col-md-6 col-lg-12 my-2'>
+                    <div className='d-flex flex-column my-2 '>
+                        <div className='d-flex align-items-center gap-2'>
+                            <label htmlFor="amneties">Amenities </label>
+                            <input
+                                type="checkbox"
+                                className='check'
+                                onChange={() => setSetPresence(!SetPresence)}
+                            />
+                        </div>
+                        {SetPresence && (
+                            <div className='row ms-1 mt-2 row-gap-1'>
+                                {AmenitiesOption.map((amenity, index) => (
+                                    <div key={index} className='checkbox'>
+                                        <input type="checkbox" id={`${amenity}`} className='check'
+                                            checked={selectedAmenities.includes(amenity)}
+                                            onChange={() => handleCheckBoxChange(selectedAmenities, SetAmenities, amenity)} />
+                                        <label htmlFor={amenity}>{amenity}</label>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                    <div className='d-flex flex-column  col-md-6 col-lg-12 my-2'>
                         <label htmlFor="courtImage">Upload image</label>
                         <input
                             type="file"
                             ref={fileInputRef}
+
                             multiple
-                            required
-                            accept='image/*,video/*'
+                            accept='image/*'
                             style={{ display: "none" }}
                             onChange={handleFileChange}
                         />
-                        <div className="image-preview d-flex gap-3 flex-wrap">
+                        <div className="image-preview d-flex align-items-center gap-3 flex-wrap">
                             {selectedFiles.map((file, index) => (
                                 file.type.startsWith("image/") && (
                                     <div className='image_box' key={index}>
-                                        <span className='close' onClick={()=>remover(index)} > <img className='close_img' src={close} alt="" /></span>
-                                    <img src={URL.createObjectURL(file)} alt='' height={110} key={index} className='images' />
+                                        <span className='close' onClick={() => remover(index)} > <img className='close_img' src={close} alt="" /></span>
+                                        <img src={URL.createObjectURL(file)} alt='' height={110} key={index} className='images' />
 
                                     </div>
                                 )
                             ))}
+                            <img src={addimage} className='my-2' id='courtImage' style={{ height: '65px', marginLeft: '10px', cursor: "pointer" }} alt="" onClick={handleAddIconClick} />
+                            {errors.files && <small className="error">{errors.files.message}</small>}
                         </div>
-                        <img src={addimage} className='my-2' id='courtImage' style={{ width: '50px', cursor: "pointer" }} alt="" onClick={handleAddIconClick} />
                     </div>
-                    <input type="submit" />
+                    <div className='d-flex flex-column   my-2'>
+                        <input id='addcourt' type="submit" />
+
+                    </div>
                 </form>
             </div>
         </div>

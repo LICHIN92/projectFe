@@ -1,28 +1,35 @@
-
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 :root{
     --dark1:#003C43;
     --dark2:#135D66;
     --light1:#E3FEF7;
     --lighr2:#E3FEF7;
   }
-
+.add_heading{
+    color: white;
+}
 .checkbox{
     /* background-color: bisque; */
-    /* display: flex;
-    justify-content: space-around;
-    align-items: center; */
-    width: 123px;
+    display: flex;
+     align-items: center;
+    width: 160px;
+    margin-top: 1px;
 }
 .check{
     margin: 3px;
     width: 15px;
     height: 15px;
+    color: green;
 }
 .label{
     /* background-color: blueviolet; */
 }
 .addcourt{
-    background-color:#006769;
+    background-color:#135D66;
     padding-block: 10px;
     
 }
@@ -30,8 +37,9 @@ label{
     color: white;
 }
 .error {
-    color: rgb(255, 59, 59);
-    font-size: 0.75em;
+    /* color: rgb(255, 0, 0); */
+    color:rgb(255, 38, 0) ;
+    font-size: 0.79em;
     margin-top: 0.15em;
 }
 .image_box{
@@ -60,13 +68,18 @@ label{
 .close_img:hover{
     opacity: 1;
 }
+#addcourt{
+    background-color: rgb(204, 17, 17);
+    color: white;
+    text-transform: uppercase;
+}
 .images{
     width: 100%;
     height: 100%;
 }
 @media(max-width:310px){
-    #courtname,#contact,#courtlocation,
-    #courtAddress1,#courtAddress2,#courtAddress3,#landmark,#courttype{
-        width: 99%;
+    #courtname,#contact,#courtlocation,#courtAddress1,#price,
+    #courtAddress2,#courtAddress3,#landmark,#courttype,#addcourt{
+        width: 100%;
     }
 }

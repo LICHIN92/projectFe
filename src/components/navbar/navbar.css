@@ -4,12 +4,23 @@
     --light1:#E3FEF7;
     --lighr2:#E3FEF7;
   }
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 .header{
     width: 100vw;
+    margin: 0;
+    padding: 0;
 }
 .navbar{
     background-color:var(--dark1);
     color: white;
+    width: 100%;
+    padding-block: 5px;
+    margin-bottom: 0;
+    
 }
 .navbar_head{
     /* background-color: rgb(21, 119, 206); */
@@ -52,4 +63,10 @@
     .navbar_head{
         font-size:larger;
     }
+  }
+  @media(max-width:250px){
+    .navbar_head{
+        font-size:medium;
+    }
+   
   }

@@ -59,7 +59,7 @@ const UserSignup = ({ setAuth }) => {
         <input type="password" {...register('confirmPassword')} placeholder='Confirm Password' />
         {errors.confirmPassword && <small className='span'>{errors.confirmPassword.message}</small>}
 
-        <input className='text-uppercase mt-2' type="submit" />
+        <input className='text-uppercase mt-2 bt' type="submit" />
       </form>
       <span className='' onClick={() => setAuth('signin')}>Already Have An Account</span>
     </div>

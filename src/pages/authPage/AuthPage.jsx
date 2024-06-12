@@ -9,7 +9,7 @@ const AuthPage = () => {
     const [auth, setAuth] = useState('signin')
     return (
         
-        <div className='auth_parent'>
+        <div className='auth_parent pb-3'>
             <div className='logo'>
                 <h1>turf_hub
                 <small className='h1small'>Get on the field faster</small>

@@ -10,12 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
     "@hookform/resolvers": "^3.4.2",
     "@popperjs/core": "^2.11.8",
     "@reduxjs/toolkit": "^2.2.5",
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
     "cookies.js": "^2.1.15",
+    "framer-motion": "^11.2.10",
     "jwt-decode": "^4.0.0",
     "react": "^18.2.0",
     "react-app-rewire-alias": "^1.1.7",
