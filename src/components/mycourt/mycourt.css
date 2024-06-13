@@ -8,3 +8,9 @@
     width: 30rem;
     background-color: aqua;
 }
+.calender-box{
+    position: fixed;
+    z-index: 1030;
+    background-color: white;
+    top: 30px;
+}

@@ -7,7 +7,7 @@ const Modal = ({ heading,CloseModal,children }) => {
     <div className='modal-container d-flex justify-content-center align-items-center'>
       <div className='modal-box border border-1'>
         <img src={close} style={{height:'35px',width:'35px'}} className='modal-close' alt="close"  onClick={CloseModal} />
-        <div className='modal-heading w-100'>
+        <div className='modal-heading w-100 d-flex justify-content-center fs-4'>
           {heading}
         </div>
         {children}
