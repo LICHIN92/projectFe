@@ -10,25 +10,51 @@ import calender from '../../assets/calender.svg'
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { DateRange } from 'react-date-range'
-import close from '../../assets/close.svg.svg'
+import arrow from '../../assets/arrow.svg'
+import times from '../../assets/timeslot.svg'
+
 const Mycourt = () => {
     const { user } = useSelector(state => state.user)
     const [MyCourt, setMyCourt] = useState()
     const [timing, setTiming] = useState(TIMINGS)
     const [timeSlot, SetTimeSlot] = useState(false)
     const [openCalendar, SetOpenCalender] = useState(false)
+    const [selectedCourt, setSelectedCourt] = useState(null)
     const [DateRangeState, setDateRangeState] = useState({
         startDate: null,
         endDate: null,
-        key:'selection'
+        key: 'selection'
     })
-   console.log(DateRangeState.startDate);
-  const Canselfun=()=>{
-    SetOpenCalender(false)
-    DateRangeState.startDate=null;
-    DateRangeState.endDate=null
-  }
+    const [opentime, SetOpentime] = useState(false)
+    const [selectedSlots, setSelectedSlots] = useState([])
+
+    const modalStartfunction = (court) => {
+        setSelectedCourt(court)
+        setDateRangeState({ startDate: null, endDate: null, key: 'selection' });
+        SetTimeSlot(true)
+        setTiming(TIMINGS)
+        setSelectedSlots([])
+    }
+    console.log(DateRangeState.startDate);
+    const Canselfun = () => {
+        SetOpenCalender(false)
+        setDateRangeState({ startDate: null, endDate: null, key: 'selection' });
+    }
+
+    const selectSlot = (slot) => {
+        setSelectedSlots([...selectedSlots, slot])
+        const newtimer = timing.filter((time) => slot.id != time.id)
+        setTiming(newtimer)
+        SetOpentime(false)
+    }
+    console.log(selectedSlots);
     console.log(timing);
+    const removetimeslot=(slot)=>{
+        console.log(slot);
+        const slots=selectedSlots.filter((item)=>slot.id != item.id);
+        setSelectedSlots(slots)
+        setTiming([...timing,slot])
+    }
     useEffect(() => {
         const getMyCourt = async () => {
             try {
@@ -62,7 +88,7 @@ const Mycourt = () => {
                             <Card.Body>
                                 <Card.Title>{court.CourtName}</Card.Title>
                                 <Card.Text>{court.Location}</Card.Text>
-                                <Button variant="primary" onClick={() => SetTimeSlot(true)}>Add Slot</Button>
+                                <Button variant="primary" onClick={() => modalStartfunction(court)}>Add Slot</Button>
                             </Card.Body>
                         </Card>
                     ))
@@ -70,48 +96,68 @@ const Mycourt = () => {
                     <p>No court</p>
                 )}
             </div>
-            {timeSlot && <Modal 
-                heading={'Add New Time Slots'}
+            {timeSlot && <Modal
+                heading={`${selectedCourt.CourtName}`}
                 CloseModal={() => SetTimeSlot(false)}>
-                <div className='.time-slot-select-modal p-2 d-flex justify-content-center  gap-3'>
-                    <p>Select Date </p>
-                    <img src={calender} alt="" style={{ height: '24px' }} onClick={() => SetOpenCalender(true)} />
-                </div>
-                <div className='d-flex gap-2 align-items-center mt-1 px-2'>
-                {DateRangeState.startDate && (
+                <div className='time-slot-select-modal'>
+                    <div className='d-flex gap-3'>
+                        <span>Select Date </span>
+                        <img src={calender} alt="" className='calendar-img' onClick={() => SetOpenCalender(true)} />
+                    </div>
+
+
+                    <div className='d-flex  gap-1 gap-sm-2 align-items-center mt-1 px-md-2'>
+                        {DateRangeState.startDate && (
                             <>
                                 <div className='timeslot-date flex-grow-1 border border-1 rounded-1 p-1'>
                                     {DateRangeState.startDate && DateRangeState.startDate.toDateString()}
                                 </div>
+                                <img src={arrow} className='arrow' alt="arrow" />
                                 <div className='timeslot-date flex-grow-1 border border-1 rounded-1 p-1'>
                                     {DateRangeState.endDate && DateRangeState.endDate.toDateString()}
                                 </div>
                             </>
                         )}
 
+                    </div>
                 </div>
+
+
                 {openCalendar && (
                     <div className='calender-box'>
-                        {/* <img
-                            src=""
-                            alt={}
-                            onClick={() => SetOpenCalender(false)}
-                        /> */}
+                        <DateRange
+                            editableDateInputs={true}
+                            onChange={item => setDateRangeState(item.selection)}
+                            moveRangeOnFirstSelection={false}
+                            ranges={[DateRangeState]}
+                            minDate={new Date()}
+                        />
+                        <div className='d-flex gap-2 px-2 py-2'>
+                            <button className='btn btn-danger' onClick={Canselfun}>Cancel</button>
+                            <button className='btn btn-success' onClick={() => SetOpenCalender(false)}>Set Date</button>
+                        </div>
 
-                         <DateRange
-                                editableDateInputs={true}
-                                onChange={item => setDateRangeState(item.selection)}
-                                moveRangeOnFirstSelection={false}
-                                ranges={[DateRangeState]}
-                                
-                            />
-                            <div className='d-flex gap-2 px-2 py-2'>
-                                <button className='btn btn-danger' onClick={Canselfun}>Cancel</button>
-                                <button className='btn btn-success' onClick={()=>SetOpenCalender(false)}>Set Date</button>
-                            </div>
-                            
                     </div>
                 )}
+
+                <div className='time-slot-select-modal'>
+                    <div className='d-flex gap-3 mb-1'>
+                        <span>Select Slots</span>
+                        <img src={times} alt="time" className='time-img' onClick={() => SetOpentime(true)} />
+                    </div>
+                    {opentime && timing.length > 0 ?(
+                        <ul className='list'>
+                            {timing.map((slot) => <li className='slot-list ' onClick={() => selectSlot(slot)}>{slot.name}</li>)}
+                        </ul>
+                    ): null}
+                    <div className='selectedSlots '>
+                        {selectedSlots.map((slot) => <span className='selected-time-slot' onClick={()=>removetimeslot(slot)}>{slot.name}</span>)}
+                    </div>
+                </div>
+                <div className="buttons">
+                    <button className='btn btn-dark'>Cancel</button>
+                    <button className='btn btn-info'>Create</button>
+                </div>
             </Modal>}
         </div>
     )

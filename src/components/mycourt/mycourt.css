@@ -5,12 +5,124 @@
 }
 
 .time-slot-select-modal {
-    width: 30rem;
-    background-color: aqua;
+    max-width: 23rem;
+    border: 1px solid black;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    margin: 10px;
+    overflow-y: auto;
 }
-.calender-box{
+
+.calender-box {
     position: fixed;
     z-index: 1030;
     background-color: white;
     top: 30px;
+}
+
+.time-img,
+.calendar-img {
+    width: 25px;
+}
+
+.arrow {
+    width: 16px;
+}
+
+.list {
+    position: absolute;
+    left: 0;
+    right: 0;
+    /* top: 2.5rem; */
+    bottom: -6rem;
+    background-color: rgb(255, 255, 255);
+    height: 10rem;
+    border-radius: 10px;
+    border: 2px solid #535050;
+    padding: 0;
+    overflow-y: auto;
+    cursor: pointer;
+}
+
+.slot-list {
+    background-color: forestgreen;
+    margin: 1px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.selectedSlots {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+}
+
+.selected-time-slot {
+    display: flex;
+    align-items: center;
+    padding-inline: 2px;
+    border-radius: 5px;
+    background-color: darkgreen;
+    color: white;
+    font-style: italic;
+    font-weight: 400;
+}
+
+.slot-list:hover {
+    background-color: rgb(6, 65, 6);
+    color: white;
+}
+
+@media(max-width:500px) {
+    .time-slot-select-modal {
+        padding: 1px;
+        margin-inline: 2px;
+    }
+
+    .timeslot-date {
+        font-size: small;
+    }
+
+    .time-img {
+        width: 23px;
+    }
+
+    .calendar-img {
+        width: 20px;
+    }
+
+    .arrow {
+        width: 10px;
+
+    }
+
+    .timeslot-date {
+        margin-bottom: 1px;
+    }
+.buttons{
+    margin-bottom: 0px;
+}
+    .buttons button {
+        font-size: small;
+    }
+
+    .selectedSlots {
+        overflow-y: auto;
+        height: 210px;
+    }
+
+    .selected-time-slot {
+        font-size: small;
+        display: flex;
+        align-items: center;
+        padding-inline: 2px;
+        border-radius: 5px;
+    }
 }
