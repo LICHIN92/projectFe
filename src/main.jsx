@@ -14,6 +14,8 @@ import HomePage from './components/homepage/HomePage.jsx';
 import AddCourt from './components/AddCourt/AddCourt.jsx';
 import CourtDetail from './pages/CourtDetail/CourtDetail.jsx';
 import Mycourt from './components/mycourt/Mycourt.jsx';
+import AdminDashboars from './components/dashboard/admindashboard/AdminDashboars.jsx';
+import Userdashboard from './components/dashboard/userDashboars/Userdashboard.jsx';
 
 const router = createBrowserRouter([
   {
@@ -47,6 +49,14 @@ const router = createBrowserRouter([
       {
         path:'/mycourt',
         element:<Mycourt/>
+      },
+      {
+        path:'/admindash',
+        element:<AdminDashboars/>
+      },
+      {
+        path:'/userdash',
+        element:<Userdashboard/>
       }
     ])
 

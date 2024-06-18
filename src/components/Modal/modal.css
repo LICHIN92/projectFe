@@ -9,7 +9,7 @@
 .modal-box{
     max-width: 80%;
     max-height: 80%;
-    min-height: 40%;
+    /* min-height: 40%; */
     border-radius: 10px;
     background-color: white;
     position: relative;
@@ -42,12 +42,7 @@
     margin-right: 5px;
     color: white;
 }
-.buttons{
-     display: flex;
-    justify-content: end;
-    gap: 10px;
-    padding-right: 10px;
-}
+
 
 @media(max-width:350px){
     .modal-heading{

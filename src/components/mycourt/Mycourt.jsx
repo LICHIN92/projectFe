@@ -74,6 +74,10 @@ const Mycourt = () => {
             getMyCourt();
         }
     }, [])
+
+    const CreateShedue=(court)=>{
+        console.log(court);
+    }
     return (
         <div>
             <h1>My Court</h1>
@@ -156,7 +160,7 @@ const Mycourt = () => {
                 </div>
                 <div className="buttons">
                     <button className='btn btn-dark'>Cancel</button>
-                    <button className='btn btn-info'>Create</button>
+                    <button className='btn btn-info' onClick={()=>CreateShedue(selectedCourt)}>Create</button>
                 </div>
             </Modal>}
         </div>

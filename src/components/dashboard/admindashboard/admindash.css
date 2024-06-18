@@ -1,0 +1,116 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.dashboard {
+    min-height: 90vh;
+    margin: 0;
+    padding: 0;
+    background-color: #ECEFF4;
+
+}
+
+.controlpnl {
+    font-size: small;
+    padding-left: 2px;
+    font-style: italic;
+}
+
+.options {
+    background-color: #4a626b;
+    padding-top: 55px;
+}
+
+.option-list {
+    height: 30px;
+    /* background-color: #59737c; */
+    list-style: none;
+    margin-top: 1px;
+    color: rgb(224, 223, 223);
+    text-align: start;
+    padding-block:5px;
+    padding-left: 5px;
+    cursor: pointer;
+}
+.option-list:hover{
+    background-color: #343c3f;
+    font-style: italic;
+    transition: background-color 1.9s ease, font-style 2.9s ease;
+}
+
+.panelbox {
+    background-color: #ECEFF4;
+    /* height: calc(100vh-60px); */
+}
+
+.cards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 10px;
+}
+
+.panelcard1,
+.panelcard3,
+.panelcard4,
+.panelcard5,
+.panelcard2 {
+    width: 20rem;
+    height: 10rem;
+    background-color: #4a626b;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.panelcard1 {
+    background-color: #03BEF5;
+}
+
+.panelcard2 {
+    background-color: #F39C11;
+}
+
+.panelcard3 {
+    background-color: #01A65A;
+}
+
+.panelcard4 {
+    background-color: #DE4B39;
+}
+.panelcard5{
+    background-color: #0073B6;
+}
+.card-headers {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 10px;
+    padding-left: 10px;
+    height: 85%;
+    position: relative;
+    bottom: 20px;
+}
+
+.info {
+    height: 15%;
+    background-color: rgb(0, 0, 0, .1);
+    text-align: center;
+    font-weight: lighter;
+    cursor: pointer;
+}
+.info:hover{
+    background-color: rgb(0, 0, 0, .1);
+    font-style: italic;
+    font-size:medium;
+}
+
+
+@media(max-width:766px){
+    .options{
+        padding: 0;
+    }
+}
