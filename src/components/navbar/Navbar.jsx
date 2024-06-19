@@ -157,7 +157,9 @@ const Navbar = () => {
                                 role="button"
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                                {user && `${user.firstName} ${user.lastName}`}
+                                {user && `${user.firstName}
+                                
+                                 `}
                             </Link>
                             <ul className="dropdown-menu">
                                 <li>
