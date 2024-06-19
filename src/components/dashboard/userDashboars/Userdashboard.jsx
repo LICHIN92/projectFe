@@ -231,7 +231,9 @@ const Userdashboard = () => {
     const id = user._id
     useEffect(() => {
         const loadingfunction = async () => {
-            const courts = await axios.get('http://localhost:3000/court')
+            // const courts = await axios.get('http://localhost:3000/court')
+            const courts = await axios.get('https://projectbe-1-91ol.onrender.com/court')
+
             setCourtNumber(courts.data.length)
         }
         loadingfunction()
@@ -239,7 +241,10 @@ const Userdashboard = () => {
 
     const deleteFunction = async (id) => {
         try {
-            const deleting = await axios.delete(`http://localhost:3000/delete/${id}`);
+            // const deleting = await axios.delete(`http://localhost:3000/delete/${id}`);
+            // https://projectbe-1-91ol.onrender.com
+            const deleting = await axios.delete(`https://projectbe-1-91ol.onrender.com/delete/${id}`);
+
             setAlert({
                 status: 'success',
                 title: 'Success!',

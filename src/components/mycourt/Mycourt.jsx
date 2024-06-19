@@ -59,7 +59,9 @@ const Mycourt = () => {
         const getMyCourt = async () => {
             try {
                 if (user && user._id) {
-                    const mycourt = await axios.get(`http://localhost:3000/court/mycourt/${user._id}`)
+                    // const mycourt = await axios.get(`http://localhost:3000/court/mycourt/${user._id}`)
+                    const mycourt = await axios.get(`https://projectbe-1-91ol.onrender.com/court/mycourt/${user._id}`)
+
                     console.log(mycourt);
                     await setMyCourt(mycourt.data)
                     console.log(MyCourt);
