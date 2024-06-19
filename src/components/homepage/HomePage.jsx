@@ -10,7 +10,7 @@ const HomePage = () => {
             try {
                 // const court = await axios.get('http://localhost:3000/court')
                 // https://projectbe-1-91ol.onrender.com
-                const court = await axios.get('https://projectbe-1-91ol.onrender.com/court')
+                const court = await axios.get('https://new-be-u7li.onrender.com/court')
 
                 console.log(court.data);
                 setCourts(court.data)
@@ -23,7 +23,7 @@ const HomePage = () => {
     const navigate=useNavigate()
     const courtdetails=async (id)=>{
         // const courtItem=await axios.get(`http://localhost:3000/court/singleCourt/${id}`)
-        const courtItem=await axios.get(`https://projectbe-1-91ol.onrender.com/court/singleCourt/${id}`)
+        const courtItem=await axios.get(`https://new-be-u7li.onrender.com/court/singleCourt/${id}`)
 
         console.log(courtItem);
         navigate(`/court/${id}`,{ state: { court: courtItem.data } })

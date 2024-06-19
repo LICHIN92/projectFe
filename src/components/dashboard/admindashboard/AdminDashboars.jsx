@@ -18,12 +18,12 @@ const AdminDashboars = () => {
             try {
                 // const courts = await axios.get('http://localhost:3000/court')
                 // https://projectbe-1-91ol.onrender.com
-                const courts = await axios.get('https://projectbe-1-91ol.onrender.com/court')
+                const courts = await axios.get('https://new-be-u7li.onrender.com/court')
 
                 console.log('courts', courts.data.length);
                 setNocourt(courts.data.length)
                 // const users = await axios.get('http://localhost:3000/usercount')
-                const users = await axios.get('https://projectbe-1-91ol.onrender.com/usercount')
+                const users = await axios.get('https://new-be-u7li.onrender.com/usercount')
 
                 setusers(users.data)
                 console.log(users);

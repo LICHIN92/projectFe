@@ -17,17 +17,15 @@ const UserSignin = ({ setAuth }) => {
         console.log(data);
         try {
             // const Signin = await axios.post("http://localhost:3000", data)
-            const Signin = await axios.post("https://projectbe-1-91ol.onrender.com", data)
+            const Signin = await axios.post("https://new-be-u7li.onrender.com", data)
 
             console.log(Signin.data.data);
             if (Signin.data.data === 'Signin successful') {
                 console.log(Signin.data);
                 localStorage.setItem('token', Signin.data.token)
                 console.log(jwtDecode(Signin.data.token)._doc);
-                // localStorage.setItem("user", JSON.stringify(Signin.data.userData));
-                // dispatch(setUserData(Signin.data.userData))
-                dispatch(setUserData(jwtDecode(Signin.data.token)._doc))
-                console.log(Signin.data.userData);
+                 dispatch(setUserData(jwtDecode(Signin.data.token)._doc))
+                // console.log(Signin.data.userData);
                 navigate('/home')
             }
         } catch (error) {
