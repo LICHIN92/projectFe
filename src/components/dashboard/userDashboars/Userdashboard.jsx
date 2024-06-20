@@ -216,6 +216,9 @@ import {
     Stack,
 } from '@chakra-ui/react'
 import { clearUserData } from '../../../redux/userSlice';
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup';
 
 const Userdashboard = () => {
     const [dashlist, setdashlist] = useState(0)
@@ -226,13 +229,24 @@ const Userdashboard = () => {
     const toggleSidebar = () => setOptions(!options);
     const [courtsNumber, setCourtNumber] = useState()
     const [alertbox, setAlert] = useState(null)
+    const[changePassword,setChangePassword]=useState(false)
     const { user } = useSelector(state => state.user)
     const dispatch = useDispatch();
     const id = user._id
+    const schema = yup.object({
+        firstName: yup.string().required(),
+        lastName: yup.string().required(),
+        email: yup.string().email('Invalid email').required('Email is required'),
+        mobile: yup.string().matches(/^[0-9]{10}$/, 'Mobile number must be 10 digits'),
+        password: yup.string().min(6, 'Password must be at least 6 characters'),
+        confirmPassword: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match')
+
+    })
+    const { register, handleSubmit } = useForm({ resolver: yupResolver(schema) });
     useEffect(() => {
         const loadingfunction = async () => {
-            // const courts = await axios.get('http://localhost:3000/court')
-            const courts = await axios.get('https://new-be-u7li.onrender.com/court')
+            const courts = await axios.get('http://localhost:3000/court')
+            // const courts = await axios.get('https://new-be-u7li.onrender.com/court')
 
             setCourtNumber(courts.data.length)
         }
@@ -241,9 +255,9 @@ const Userdashboard = () => {
 
     const deleteFunction = async (id) => {
         try {
-            // const deleting = await axios.delete(`http://localhost:3000/delete/${id}`);
+            const deleting = await axios.delete(`http://localhost:3000/delete/${id}`);
             // https://projectbe-1-91ol.onrender.com
-            const deleting = await axios.delete(`https://new-be-u7li.onrender.com/delete/${id}`);
+            // const deleting = await axios.delete(`https://new-be-u7li.onrender.com/delete/${id}`);
 
             setAlert({
                 status: 'success',
@@ -264,7 +278,9 @@ const Userdashboard = () => {
             });
         }
     }
-
+    const onsubmit = (data) => {
+        console.log(data);
+    }
     return (
         <div className='userdashboard row'>
             <div className='sidebar col-lg-2 col-md-3 '>
@@ -274,7 +290,7 @@ const Userdashboard = () => {
                 </div>
                 <div className={options ? 'visible' : 'hidden'}>
                     <li onClick={() => setdashlist(0)}>Dashboard</li>
-                    <li onClick={() => setdashlist(1)}>view courts</li>
+                    <li onClick={() => setdashlist(1)}>View Courts</li>
                     <li onClick={() => setdashlist(2)}>Edit Account</li>
                     <li onClick={() => setdashlist(3)}>Delete Account</li>
                     <li onClick={() => setdashlist(4)}>Contact</li>
@@ -353,36 +369,43 @@ const Userdashboard = () => {
                 {dashlist === 2 && (
                     <div className=''>
                         <h3 className='m-lg-3 text-danger'>Edit Account</h3>
-                        <form action="">
+                        <form onSubmit={handleSubmit(onsubmit)} action="" className='px-3'>
                             <div className='edit'>
                                 <div className='box'>
                                     <label htmlFor="">FirstName</label>
-                                    <input type="text" value={user.firstName}  />
+                                    <input type="text" {...register('firstName')} defaultValue={user.firstName} />
                                 </div>
                                 <div className='box'>
                                     <label htmlFor="">LastName</label>
-                                    <input type="text" value={user.lastName}/>
+                                    <input type="text" {...register('lastName')} defaultValue={user.lastName} />
                                 </div>
                                 <div className='box'>
                                     <label htmlFor="">Email</label>
-                                    <input type="text" value={user.email} />
+                                    <input type="text" {...register('email')} defaultValue={user.email} />
                                 </div>
                                 <div className='box'>
                                     <label htmlFor="">Mobile</label>
-                                    <input type="text" value={user.mobile}/>
+                                    <input type="text" {...register('mobile')} defaultValue={user.mobile} />
+                                </div>
+                                {!changePassword &&<button className='btn' onClick={()=>setChangePassword(!changePassword)}>Change Password</button>}
+                               { changePassword && (<>
+                               <div className='box'>
+                                    <label htmlFor="">Change Password</label>
+                                    <input type="password" {...register('password')} />
                                 </div>
                                 <div className='box'>
-                                    <label htmlFor="">Change Password</label>
-                                    <input type="password" />
+                                    <label htmlFor="">Confirm Password</label>
+                                    <input type="password" {...register('confirmPassword')} />
                                 </div>
+                               </>)}
                             </div>
                             <div className='deletebox'>
-                            <button className='btn btn-info' onClick={() => setdashlist(0)}>Cancel</button>
-                            <button className='btn btn-danger' onClick={() => { }}>Delete</button>
-                        </div>
+                                <button className='btn btn-danger' onClick={() => setdashlist(0)}>Cancel</button>
+                                <button type='submit' className='btn btn-info text-white' onClick={() => { }}>Update</button>
+                            </div>
                         </form>
 
-                        
+
                     </div>
                 )}
             </div>
