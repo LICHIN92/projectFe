@@ -16,6 +16,7 @@ import CourtDetail from './pages/CourtDetail/CourtDetail.jsx';
 import Mycourt from './components/mycourt/Mycourt.jsx';
 import AdminDashboars from './components/dashboard/admindashboard/AdminDashboars.jsx';
 import Userdashboard from './components/dashboard/userDashboars/Userdashboard.jsx';
+import Adminprotect from './components/protectedRoutes/Adminprotect.jsx';
 
 const router = createBrowserRouter([
   {
@@ -40,7 +41,12 @@ const router = createBrowserRouter([
       },
       {
         path:'/addCourt',
-        element:<AddCourt/>
+        // element:<AddCourt/>
+        element:(
+          <Adminprotect>
+            <AddCourt/>
+          </Adminprotect>
+        )
       },
       {
         path:'/court/:id',

@@ -202,6 +202,12 @@ import backimg from '../../../assets/duffy-brook-IwDTKKFmWAc-unsplash.jpg'
 import addicon from '../../../assets/create.svg'
 import deleteicon from '../../../assets/delete.svg'
 import connect from '../../../assets/contact.svg'
+import mail from '../../../assets/email.svg'
+import insta from '../../../assets/instagram.svg'
+import fb from '../../../assets/facebook.svg'
+import mails from '../../../assets/emails.svg'
+import location from '../../../assets/location.svg'
+import mobile from '../../../assets/mobile.svg'
 import HomePage from '../../homepage/HomePage';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -215,7 +221,7 @@ import {
     AlertDescription,
     Stack,
 } from '@chakra-ui/react'
-import { clearUserData } from '../../../redux/userSlice';
+import { clearUserData, setUserData } from '../../../redux/userSlice';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -229,7 +235,7 @@ const Userdashboard = () => {
     const toggleSidebar = () => setOptions(!options);
     const [courtsNumber, setCourtNumber] = useState()
     const [alertbox, setAlert] = useState(null)
-    const[changePassword,setChangePassword]=useState(false)
+    const [changePassword, setChangePassword] = useState(false)
     const { user } = useSelector(state => state.user)
     const dispatch = useDispatch();
     const id = user._id
@@ -252,7 +258,11 @@ const Userdashboard = () => {
         }
         loadingfunction()
     }, [])
-
+    const LogoutFuntion = () => {
+        setTimeout(() => {
+            setAlert(null)
+        }, 4000);
+    }
     const deleteFunction = async (id) => {
         try {
             const deleting = await axios.delete(`http://localhost:3000/delete/${id}`);
@@ -278,8 +288,34 @@ const Userdashboard = () => {
             });
         }
     }
-    const onsubmit = (data) => {
+    const onsubmit = async (data) => {
         console.log(data);
+        try {
+            const token = localStorage.getItem('token');
+            const edit = await axios.patch(`http://localhost:3000/updates/${id}`, data, {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            })
+            console.log(edit.data);
+            dispatch(setUserData(edit.data))
+            if (edit.data) {
+                setdashlist(0)
+
+                setAlert({
+                    status: 'success',
+                    title: 'Success!',
+                    description: 'Updated Successfully'
+                });
+                setTimeout(() => { setAlert(null) }, 5000);
+            }
+
+        } catch (error) {
+
+        }
+    }
+    const contactUs = (data) => {
+
     }
     return (
         <div className='userdashboard row'>
@@ -307,7 +343,7 @@ const Userdashboard = () => {
                     <h2 className='dash-heading ps-lg-2'>Dashboard<span className='controlpnl'>Control panel</span></h2>
                 </div>
                 {alertbox && (
-                    <Stack spacing={3} mb={4}>
+                    <Stack className='mx-5 alrt' spacing={3} mb={4}>
                         <Alert status={alertbox.status} variant='subtle'>
                             <AlertIcon />
                             <AlertTitle>{alertbox.title}</AlertTitle>
@@ -387,25 +423,63 @@ const Userdashboard = () => {
                                     <label htmlFor="">Mobile</label>
                                     <input type="text" {...register('mobile')} defaultValue={user.mobile} />
                                 </div>
-                                {!changePassword &&<button className='btn' onClick={()=>setChangePassword(!changePassword)}>Change Password</button>}
-                               { changePassword && (<>
-                               <div className='box'>
-                                    <label htmlFor="">Change Password</label>
-                                    <input type="password" {...register('password')} />
-                                </div>
-                                <div className='box'>
-                                    <label htmlFor="">Confirm Password</label>
-                                    <input type="password" {...register('confirmPassword')} />
-                                </div>
-                               </>)}
+                                {!changePassword && <button className='btn' onClick={() => setChangePassword(!changePassword)}>Change Password</button>}
+                                {changePassword && (<>
+                                    <div className='box'>
+                                        <label htmlFor="">Change Password</label>
+                                        <input type="password" {...register('password')} />
+                                    </div>
+                                    <div className='box'>
+                                        <label htmlFor="">Confirm Password</label>
+                                        <input type="password" {...register('confirmPassword')} />
+                                    </div>
+                                </>)}
                             </div>
                             <div className='deletebox'>
                                 <button className='btn btn-danger' onClick={() => setdashlist(0)}>Cancel</button>
-                                <button type='submit' className='btn btn-info text-white' onClick={() => { }}>Update</button>
+                                <button type='submit' className='btn btn-info text-white'>Update</button>
                             </div>
                         </form>
 
 
+                    </div>
+                )}
+                {dashlist === 4 && (
+                    // 'contact'
+                    <div className='contact'>
+                        <h2 className='text-capitalize text-info text-'>contact </h2>
+                        <div className='contact-box'>
+                            <div className='d-flex gap-3 justify-content-center'>
+                                <img src={mail} alt="email" />
+                                <img src={insta} alt="instagram" onClick={() => window.open('https://www.instagram.com/lichinchandran92/', '_blank')} />
+                                <img src={fb} alt="facebook" />
+                            </div>
+                            <div className='d-flex flex-column py-3 gap-3 '>
+                                <div className='xx' >
+                                    <span>
+                                        <label className='text-black'>Email</label>
+                                        <img src={mails} alt="" />
+                                    </span>
+                                    <p>turfhub@gmail.com</p>
+                                </div>
+                                <div className='xx'>
+                                    <span>
+                                        <label className='text-black'>Mobile</label>
+                                        <img src={mobile} alt="" />
+                                    </span>
+                                    <p>8086200861</p>
+
+                                </div>
+                                <div className='xx'>
+                                    <span>
+                                        <label htmlFor="" className='text-black'>Location</label>
+                                        <img src={location} alt="" />
+                                    </span>
+                                    <p>Calicut</p>
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 )}
             </div>

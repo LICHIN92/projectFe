@@ -39,6 +39,7 @@ const UserProtected = ({ children }) => {
     const decoded = jwtDecode(token);
     const currentTime = Date.now() / 1000;
     console.log(currentTime >= decoded.exp);
+    console.log(decoded);
 
     if (currentTime >= decoded.exp) {
 

@@ -33,6 +33,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {jwtDecode} from "jwt-decode";
 
 const token = localStorage.getItem("token");
+
 const USER = token ? jwtDecode(token)._doc : null;
 // const USER=JSON.parse(localStorage.getItem('user'))|| {}
 

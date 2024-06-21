@@ -127,6 +127,19 @@
     background-color: #fff;
     border: 1px solid #ccc;
 }
+@keyframes slideIn {
+    from {
+        opacity: 0.1;
+    }
+    to {
+        opacity: 0.9;
+    }
+}
+
+.alet{
+    background-color: blue;
+    animation: slideIn 2s ease-in-out;
+}
 .deletebox{
     /* width: 40vw; */
     display: flex;
@@ -144,9 +157,51 @@
     padding-left: 10px;
     padding-block: 15px;
 }
+.box{
+    display: flex;
+    flex-direction: column;
+}
 .box label{
     color: black;
+}
+.contact{
+    /* position: absolute; */
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-box{
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5px;
+    padding-top: 25px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    gap: 15px;
+    border-radius: 5px;
+}
+.xx{
+    text-align:start;
+    padding-left: 10px;
+}
+.xx p{
+    color: blue;
+}
+.xx span{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.xx span img{
+    width: 20px;
+
+}
+.contact-box img{
+    width: 40px;
+    cursor: pointer;
 }
 @media(max-width:992px) {
     .user-card-box {
@@ -212,7 +267,11 @@
         padding: 0;
     }
 }
-
+@media(max-width:550px){
+    .contact-box{
+        width: 90vw;
+    }
+}
 @media(max-width:350px) {
 
     .user-card,
@@ -240,6 +299,23 @@
 
     .card-head h5 {
         font-size: 1rem;
+    }
+    input{
+        width: 80vw;
+        font-size:medium;
+        /* height: ; */
+    }
+    .edit{
+        padding-inline: 2px;
+    }
+    .box{
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        padding: 0;
+    }
+    .box input{
+        margin: 0;
     }
 }
 
