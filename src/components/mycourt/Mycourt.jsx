@@ -77,8 +77,21 @@ const Mycourt = () => {
         }
     }, [])
 
-    const CreateShedue=(court)=>{
+    const CreateShedule=async(court)=>{
         console.log(court);
+        console.log(selectedSlots);
+        console.log(DateRangeState);
+        try {
+            const createSlot=await axios.post(`http://localhost:3000/Slot/${court._id}`,
+                {
+                  startDate:DateRangeState.startDate,
+                  endDate:DateRangeState.endDate,
+                  selectedSlot:selectedSlots
+                }
+            )
+        } catch (error) {
+            console.log(error);
+        }
     }
     return (
         <div>
@@ -162,7 +175,7 @@ const Mycourt = () => {
                 </div>
                 <div className="buttons">
                     <button className='btn btn-dark'>Cancel</button>
-                    <button className='btn btn-info' onClick={()=>CreateShedue(selectedCourt)}>Create</button>
+                    <button className='btn btn-info' onClick={()=>CreateShedule(selectedCourt)}>Create</button>
                 </div>
             </Modal>}
         </div>

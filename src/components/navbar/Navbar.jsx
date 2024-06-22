@@ -139,20 +139,28 @@ const Navbar = () => {
                     <span className="navbar-toggler-icon" />
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav mb-2 mb-lg-0">
-                        <li className="nav-item">
-                            <Link className="nav-link active text-white me-lg-2" aria-current="page" to="/">
+                    <ul className="navbar-nav mb-2 mb-lg-0 ">
+                        <li className="nav-item me-1">
+                            <Link className="nav-link active text-white " aria-current="page" to="/">
                                 Home
                             </Link>
                         </li>
-                        <li className="nav-item me-2">
+                        {user.role == 'admin' && <li className="nav-item me-">
                             <Link className="nav-link text-white" to="/mycourt">
                                 Courts
                             </Link>
+
+                        </li>}
+                        <li className="nav-item me-1">
+                            <Link className="nav-link text-white" to={user.role === 'admin' ? "/admindash" : "/userdash"}>
+                                Dashboard
+                            </Link>
                         </li>
-                        <li className="nav-item dropdown text-white me-lg-2">
+
+
+                        <li className="nav-item dropdown text-white me-lg-1">
                             <Link
-                                className="nav-link dropdown-toggle text-white"
+                                className="nav-link dropdown-toggle text-white text-capitalize"
                                 to="#"
                                 role="button"
                                 data-bs-toggle="dropdown"
@@ -167,14 +175,14 @@ const Navbar = () => {
                                         My_Booking
                                     </Link>
                                 </li>
-                                {user.role=='admin' &&
-                                 <li>
-                                 <Link className="dropdown-item" to="/addCourt">
-                                     AddCourt
-                                 </Link>
-                             </li>
+                                {user.role == 'admin' &&
+                                    <li>
+                                        <Link className="dropdown-item" to="/addCourt">
+                                            AddCourt
+                                        </Link>
+                                    </li>
                                 }
-                               
+
                                 <li>
                                     <hr className="dropdown-divider" />
                                 </li>

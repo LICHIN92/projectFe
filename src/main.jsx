@@ -34,35 +34,44 @@ const router = createBrowserRouter([
         <Home />
       </UserProtected>
     ),
-    children:([
+    children: ([
       {
-        path:'/home',
-        element:<HomePage/>        
+        path: '/home',
+        element: <HomePage />
+      },
+
+      {
+        path: '/userdash',
+        element: <Userdashboard />
       },
       {
-        path:'/addCourt',
-        // element:<AddCourt/>
-        element:(
+        path: '/addCourt',
+        element: <AddCourt />
+      },
+
+      {
+        path: '/court/:id',
+        element: <CourtDetail />
+      },
+      {
+        path: '/mycourt',
+        element: <Mycourt />
+      },
+      {
+        path: '/admindash',
+        element: ([
           <Adminprotect>
-            <AddCourt/>
+            <AdminDashboars />
           </Adminprotect>
-        )
+        ])
       },
       {
-        path:'/court/:id',
-        element:<CourtDetail/>
-      },
-      {
-        path:'/mycourt',
-        element:<Mycourt/>
-      },
-      {
-        path:'/admindash',
-        element:<AdminDashboars/>
-      },
-      {
-        path:'/userdash',
-        element:<Userdashboard/>
+        path: '/addCourt',
+        element: ([
+          <Adminprotect>
+            <AddCourt />
+          </Adminprotect>
+        ])
       }
     ])
 
@@ -73,11 +82,11 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ChakraProvider>
-    <Provider store={Store}>
+      <Provider store={Store}>
 
-      <RouterProvider router={router} />
+        <RouterProvider router={router} />
 
-    </Provider>
+      </Provider>
     </ChakraProvider>
   </React.StrictMode>
 );

@@ -11,7 +11,7 @@ import { jwtDecode } from 'jwt-decode';
 
 const UserSignin = ({ setAuth }) => {
     const navigate = useNavigate();
-    const dispatch=useDispatch()
+    const dispatch = useDispatch()
     const { register, handleSubmit, formState: { errors } } = useForm()
     const onsubmit = async (data) => {
         console.log(data);
@@ -22,10 +22,15 @@ const UserSignin = ({ setAuth }) => {
             console.log(Signin.data.data);
             if (Signin.data.data === 'Signin successful') {
                 console.log(Signin.data);
-                localStorage.setItem('token', Signin.data.token)
-                console.log(jwtDecode(Signin.data.token)._doc);
-                 dispatch(setUserData(jwtDecode(Signin.data.token)._doc))
-                // console.log(Signin.data.userData);
+                const token=Signin.data.token
+                localStorage.setItem('token',token)
+                const userData=jwtDecode(token)._doc
+                dispatch(setUserData(userData))
+                console.log(userData.role);
+                // if (userData.role == 'user') {
+                //     navigate('/admindash')
+                //     return
+                // }
                 navigate('/home')
             }
         } catch (error) {
@@ -46,7 +51,7 @@ const UserSignin = ({ setAuth }) => {
                 <input className='text-uppercase mt-3 bt' type="submit" />
             </form>
             <hr style={{ color: "white", width: '100%' }} />
-            <button  onClick={() => setAuth('signup')}>Create new account</button>
+            <button onClick={() => setAuth('signup')}>Create new account</button>
         </div>
     )
 }
