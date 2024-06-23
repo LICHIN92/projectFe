@@ -81,13 +81,17 @@ const Mycourt = () => {
         console.log(court);
         console.log(selectedSlots);
         console.log(DateRangeState);
+        const token=localStorage.getItem('token')
         try {
             const createSlot=await axios.post(`http://localhost:3000/Slot/${court._id}`,
                 {
                   startDate:DateRangeState.startDate,
                   endDate:DateRangeState.endDate,
                   selectedSlot:selectedSlots
-                }
+                },{
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }}
             )
         } catch (error) {
             console.log(error);
