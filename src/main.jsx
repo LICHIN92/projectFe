@@ -59,19 +59,15 @@ const router = createBrowserRouter([
       },
       {
         path: '/admindash',
-        element: ([
-          <Adminprotect>
-            <AdminDashboars />
-          </Adminprotect>
-        ])
+        element:
+          <AdminDashboars />
+
       },
       {
         path: '/addCourt',
-        element: ([
-          <Adminprotect>
-            <AddCourt />
-          </Adminprotect>
-        ])
+        element:
+          <AddCourt />
+
       }
     ])
 

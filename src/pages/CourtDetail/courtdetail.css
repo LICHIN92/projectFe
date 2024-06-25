@@ -1,0 +1,252 @@
+/* * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.courtdetails {
+    padding-inline: 20px;
+    
+}
+
+
+.img-place {
+    padding-left: 14px;
+    background-color: rgb(123, 199, 199);
+    padding-block: 5px;
+}
+
+.court-pic {
+    border: 1px solid rgb(231, 202, 202);
+    border-radius: 8px;
+    width: 100%;
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    background-color: aqua;
+
+}
+
+.court-pic img {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+
+}
+
+.court-book {
+    padding-inline: 15px;
+    padding-top: 5px;
+    border: 2px solid;
+
+}
+
+.court-book button {
+    width: 100%;
+    height: 50px;
+    background-color: #00B562;
+    font-size: large;
+}
+
+.sports {
+    width: 100%;
+    min-height:10px ;
+    border: 1px solid rgb(0, 0, 0, .2);
+    border-radius: 5px;
+    margin-top: 15px;
+    padding-left: 10px;
+    padding-block: 5px;
+}
+
+.sports-available {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    background-color: aquamarine;
+    padding: 5px;
+    padding-left: 10px;
+    gap: 10px;
+}
+
+.sports-img-box {
+    width: 90px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding-inline: 5px;
+    border: 1px solid rgba(81, 255, 0, 0.514);
+    border-radius: 5px;
+    background-color:rgba(0, 0, 0, 0.1);
+}
+
+.sports-img-box small {
+    font-size:1rem;
+}
+
+.sports-img-box img {
+    width: 30px;
+}
+
+@media(max-width:300px){
+    .sports {
+        width: 100%;
+        justify-content: center;
+        border: 1px solid rgb(0, 0, 0, .2);
+        border-radius: 5px;
+        margin-top: 15px;
+        padding: 0px;
+    }
+    .sports-available {
+         width: 100%;
+         justify-content: center;
+         gap:5px;
+    }
+} */
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.courtdetails {
+    padding: 20px;
+}
+
+.img-place {
+    padding-left: 14px;
+    background-color: rgb(123, 199, 199, 0.1);
+    padding-block: 5px;
+}
+
+.court-pic {
+    border: 1px solid rgb(231, 202, 202);
+    border-radius: 8px;
+    width: 100%;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.court-pic img {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    /* object-fit: cover; */
+}
+
+.court-book {
+    padding: 15px 15px 0 15px;
+}
+
+.court-book button {
+    width: 100%;
+    height: 50px;
+    background-color: #00b562;
+    font-size: large;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.court-amenities,
+.sports {
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    margin-top: 15px;
+    padding: 5px 10px;
+}
+.amenities-available{
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+
+}
+.court-amenities-box{
+    background-color: #d5e6de;
+    width: 140px;
+    height: 40px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    
+}
+.court-amenities-box img{
+    width: 40px;
+}
+.court-amenities-box small{
+    font-size: 1rem;
+}
+
+.sports-available {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 5px 10px;
+}
+
+.sports-img-box {
+    width: 90px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 5px;
+    border: 1px solid rgba(81, 255, 0, 0.514);
+    border-radius: 5px;
+}
+
+.sports-img-box small {
+    font-size: 1rem;
+}
+
+.sports-img-box img {
+    width: 30px;
+}
+#availableSlot{
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+}
+#availableSlot span{
+   background-color: #106d04;
+   border-radius: 5px;
+   font-size: 14px;
+   padding: 2px;
+   color: white;
+}
+.slotselected{
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    padding: 2px;
+}
+.slotselected span{
+    background-color: #04616d;
+    border-radius: 5px;
+    font-size: 14px;
+    padding: 2px;
+    color: white; 
+}
+@media (max-width: 300px) {
+    .sports {
+        justify-content: center;
+        margin-top: 15px;
+        padding: 0;
+    }
+
+    .sports-available {
+        justify-content: center;
+        gap: 5px;
+    }
+}
