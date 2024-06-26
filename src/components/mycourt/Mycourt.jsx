@@ -67,8 +67,8 @@ const Mycourt = () => {
         const getMyCourt = async () => {
             try {
                 if (user && user._id) {
-                    const mycourt = await axios.get(`https://projectbe-1-91ol.onrender.com/court/mycourt/${user._id}`)
-                    // const mycourt = await axios.get(`https://projectbe-1-91ol.onrender.com/court/mycourt/${user._id}`)
+                    const mycourt = await axios.get(`https://turfhubbe.onrender.com/court/mycourt/${user._id}`)
+                    // const mycourt = await axios.get(`https://turfhubbe.onrender.com/court/mycourt/${user._id}`)
 
                     console.log(mycourt);
                     await setMyCourt(mycourt.data)
@@ -91,7 +91,7 @@ const Mycourt = () => {
         console.log(DateRangeState);
         const token = localStorage.getItem('token')
         try {
-            const createSlot = await axios.post(`https://projectbe-1-91ol.onrender.com/Slot/${court._id}`,
+            const createSlot = await axios.post(`https://turfhubbe.onrender.com/Slot/${court._id}`,
                 {
                     startDate: DateRangeState.startDate,
                     endDate: DateRangeState.endDate,

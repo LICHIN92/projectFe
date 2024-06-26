@@ -123,7 +123,7 @@ const AddCourt = () => {
                 if (selectedFiles.length > 0) {
                     console.log(data);
                     const token = localStorage.getItem('token');
-                    const response = await axios.post("https://projectbe-1-91ol.onrender.com/admin", formData, {
+                    const response = await axios.post("https://turfhubbe.onrender.com/admin", formData, {
                         headers: {
                             "Content-Type": "multipart/form-data",
                             "Authorization": `Bearer ${token}`

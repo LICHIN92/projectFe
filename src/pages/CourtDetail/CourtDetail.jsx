@@ -43,8 +43,8 @@ const CourtDetail = () => {
 
   const fetchSlotData = async () => {
     const Id = court._id;
-    try {
-      const response = await axios.get('https://projectbe-1-91ol.onrender.com/Slot/', {
+    try {                               
+      const response = await axios.get('https://turfhubbe.onrender.com/Slot/', {
         params: {
           date: selectedDate,
           id: Id
@@ -91,7 +91,7 @@ const CourtDetail = () => {
       }
 
       const slotIds = selectedSlots.map((ele) => ele._id);
-      const orderResponse = await axios.post('https://projectbe-1-91ol.onrender.com/Order', {
+      const orderResponse = await axios.post('https://turfhubbe.onrender.com/Order', {
         amount: price,
         currency: 'INR',
         slotId: slotIds,
@@ -128,7 +128,7 @@ const CourtDetail = () => {
             date: selectedDate
           };
           try {
-            const result = await axios.post('https://projectbe-1-91ol.onrender.com/Order/verify', data, {
+            const result = await axios.post('https://turfhubbe.onrender.com/Order/verify', data, {
               headers: {
                 "Authorization": `Bearer ${token}`
               }
