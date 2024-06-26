@@ -76,7 +76,7 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <ChakraProvider>
       <Provider store={Store}>
 
@@ -84,5 +84,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
       </Provider>
     </ChakraProvider>
-  </React.StrictMode>
+  // </React.StrictMode>
 );
