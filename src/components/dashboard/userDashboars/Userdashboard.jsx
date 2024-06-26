@@ -55,8 +55,8 @@ const Userdashboard = () => {
     const { register, handleSubmit } = useForm({ resolver: yupResolver(schema) });
     useEffect(() => {
         const loadingfunction = async () => {
-            // const courts = await axios.get('https://turfhubbe.onrender.com/court')
-            const courts = await axios.get('https://turfhubbe.onrender.com/court')
+            // const courts = await axios.get('http://localhost:3000/court')
+            const courts = await axios.get('http://localhost:3000/court')
 
             setCourtNumber(courts.data.length)
         }
@@ -69,7 +69,7 @@ const Userdashboard = () => {
     }
     const deleteFunction = async (id) => {
         try {
-            const deleting = await axios.delete(`https://turfhubbe.onrender.com/delete/${id}`);
+            const deleting = await axios.delete(`http://localhost:3000/delete/${id}`);
 
             setAlert({
                 status: 'success',
@@ -94,7 +94,7 @@ const Userdashboard = () => {
         console.log(data);
         try {
             const token = localStorage.getItem('token');
-            const edit = await axios.patch(`https://turfhubbe.onrender.com/updates/${id}`, data, {
+            const edit = await axios.patch(`http://localhost:3000/updates/${id}`, data, {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }

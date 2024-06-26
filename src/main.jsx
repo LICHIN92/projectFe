@@ -84,5 +84,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
       </Provider>
     </ChakraProvider>
-  // </React.StrictMode>
+  //  </React.StrictMode>
 );

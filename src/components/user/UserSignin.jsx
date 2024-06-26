@@ -21,20 +21,16 @@ const UserSignin = ({ setAuth }) => {
                     'Content-Type': 'application/json',
                 }
             })
-            // const Signin = await axios.post("https://turfhubbe.onrender.com", data)
 
             console.log(Signin.data.data);
             if (Signin.data.data === 'Signin successful') {
                 console.log(Signin.data);
-                const token=Signin.data.token
-                await localStorage.setItem('token',token)
-                const userData=await jwtDecode(token)._doc
+                const token = Signin.data.token
+                await localStorage.setItem('token', token)
+                const userData = await jwtDecode(token)._doc
                 dispatch(setUserData(userData))
                 console.log(userData.role);
-                // if (userData.role == 'user') {
-                //     navigate('/admindash')
-                //     return
-                // }
+
                 navigate('/home')
             }
         } catch (error) {

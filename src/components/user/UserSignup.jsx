@@ -20,8 +20,8 @@ const UserSignup = ({ setAuth }) => {
 
   const onsubmit = async (data) => {
     try {
-      const signup = await axios.post('https://turfhubbe.onrender.com/signup', data)
-      // const signup = await axios.post('https://turfhubbe.onrender.com/signup', data)
+      const signup = await axios.post('http://localhost:3000/signup', data)
+      // const signup = await axios.post('http://localhost:3000/signup', data)
 
       console.log(signup.data.message);
       if(signup.data.message==='User created successfully'){
