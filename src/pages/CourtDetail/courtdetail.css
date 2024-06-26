@@ -238,6 +238,9 @@
     padding: 2px;
     color: white; 
 }
+.point{
+    cursor: pointer;
+}
 @media (max-width: 300px) {
     .sports {
         justify-content: center;

@@ -12,6 +12,13 @@ import "react-date-range/dist/theme/default.css";
 import { DateRange } from 'react-date-range'
 import arrow from '../../assets/arrow.svg'
 import times from '../../assets/timeslot.svg'
+import {
+    Alert,
+    AlertIcon,
+    AlertTitle,
+    AlertDescription,
+    Stack,
+} from '@chakra-ui/react'
 
 const Mycourt = () => {
     const { user } = useSelector(state => state.user)
@@ -27,6 +34,7 @@ const Mycourt = () => {
     })
     const [opentime, SetOpentime] = useState(false)
     const [selectedSlots, setSelectedSlots] = useState([])
+    const [alertbox, setAlertbox] = useState(null)
 
     const modalStartfunction = (court) => {
         setSelectedCourt(court)
@@ -49,17 +57,17 @@ const Mycourt = () => {
     }
     console.log(selectedSlots);
     console.log(timing);
-    const removetimeslot=(slot)=>{
+    const removetimeslot = (slot) => {
         console.log(slot);
-        const slots=selectedSlots.filter((item)=>slot.id != item.id);
+        const slots = selectedSlots.filter((item) => slot.id != item.id);
         setSelectedSlots(slots)
-        setTiming([...timing,slot])
+        setTiming([...timing, slot])
     }
     useEffect(() => {
         const getMyCourt = async () => {
             try {
                 if (user && user._id) {
-                    const mycourt = await axios.get(`http://localhost:3000/court/mycourt/${user._id}`)
+                    const mycourt = await axios.get(`https://new-be-u7li.onrender.com/court/mycourt/${user._id}`)
                     // const mycourt = await axios.get(`https://new-be-u7li.onrender.com/court/mycourt/${user._id}`)
 
                     console.log(mycourt);
@@ -77,30 +85,50 @@ const Mycourt = () => {
         }
     }, [])
 
-    const CreateShedule=async(court)=>{
+    const CreateShedule = async (court) => {
         console.log(court);
         console.log(selectedSlots);
         console.log(DateRangeState);
-        const token=localStorage.getItem('token')
+        const token = localStorage.getItem('token')
         try {
-            const createSlot=await axios.post(`http://localhost:3000/Slot/${court._id}`,
+            const createSlot = await axios.post(`https://new-be-u7li.onrender.com/Slot/${court._id}`,
                 {
-                  startDate:DateRangeState.startDate,
-                  endDate:DateRangeState.endDate,
-                  selectedSlot:selectedSlots
-                },{
+                    startDate: DateRangeState.startDate,
+                    endDate: DateRangeState.endDate,
+                    selectedSlot: selectedSlots
+                }, {
                 headers: {
                     "Authorization": `Bearer ${token}`
-                }}
+                }
+            }
             )
+            console.log(createSlot);
+            SetTimeSlot(false)
+            setAlertbox({
+                status: 'success',
+                title: 'Success!',
+                description: createSlot.data.message
+            });
+            setTimeout(() => { setAlertbox(null) }, 4000);
         } catch (error) {
             console.log(error);
+            alert(error.response.data)
         }
     }
     return (
         <div>
             <h1>My Court</h1>
+            {alertbox && (
+                    <Stack spacing={3} mb={4}>
+                        <Alert status={alertbox.status} variant='subtle'>
+                            <AlertIcon />
+                            <AlertTitle>{alertbox.title}</AlertTitle>
+                            <AlertDescription>{alertbox.description}</AlertDescription>
+                        </Alert>
+                    </Stack>
+                )}
             <div className='d-flex flex-wrap gap-3 px-3'>
+               
                 {MyCourt && MyCourt.length > 0 ? (
                     MyCourt.map(court => (
                         <Card style={{ width: '18rem' }} key={court._id}>
@@ -168,18 +196,18 @@ const Mycourt = () => {
                         <span>Select Slots</span>
                         <img src={times} alt="time" className='time-img' onClick={() => SetOpentime(true)} />
                     </div>
-                    {opentime && timing.length > 0 ?(
+                    {opentime && timing.length > 0 ? (
                         <ul className='list'>
                             {timing.map((slot) => <li className='slot-list ' onClick={() => selectSlot(slot)}>{slot.name}</li>)}
                         </ul>
-                    ): null}
+                    ) : null}
                     <div className='selectedSlots '>
-                        {selectedSlots.map((slot) => <span className='selected-time-slot' onClick={()=>removetimeslot(slot)}>{slot.name}</span>)}
+                        {selectedSlots.map((slot) => <span className='selected-time-slot' onClick={() => removetimeslot(slot)}>{slot.name}</span>)}
                     </div>
                 </div>
                 <div className="buttons">
                     <button className='btn btn-dark'>Cancel</button>
-                    <button className='btn btn-info' onClick={()=>CreateShedule(selectedCourt)}>Create</button>
+                    <button className='btn btn-info' onClick={() => CreateShedule(selectedCourt)}>Create</button>
                 </div>
             </Modal>}
         </div>

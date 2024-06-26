@@ -119,6 +119,7 @@
     font-weight: light;
     font-style: italic;
 }
+
 .quill {
     margin-top: 10px;
     background-color: #EFA840;
@@ -127,44 +128,51 @@
     background-color: #fff;
     border: 1px solid #ccc;
 }
+
 @keyframes slideIn {
     from {
         opacity: 0.1;
     }
+
     to {
         opacity: 0.9;
     }
 }
 
-.alet{
+.alet {
     background-color: blue;
     animation: slideIn 2s ease-in-out;
 }
-.deletebox{
+
+.deletebox {
     /* width: 40vw; */
     display: flex;
     justify-content: start;
     padding-inline: 20px;
     /* background-color: #EFA840; */
     gap: 20px;
-    margin-top:45px;
+    margin-top: 45px;
 }
-.edit{
+
+.edit {
     border: 2px solid black;
     display: flex;
-    flex-wrap:wrap;
+    flex-wrap: wrap;
     gap: 20px;
     padding-left: 10px;
     padding-block: 15px;
 }
-.box{
+
+.box {
     display: flex;
     flex-direction: column;
 }
-.box label{
+
+.box label {
     color: black;
 }
-.contact{
+
+.contact {
     /* position: absolute; */
     display: flex;
     flex-direction: column;
@@ -172,7 +180,7 @@
     justify-content: center;
 }
 
-.contact-box{
+.contact-box {
     width: 500px;
     display: flex;
     flex-direction: column;
@@ -183,26 +191,34 @@
     gap: 15px;
     border-radius: 5px;
 }
-.xx{
-    text-align:start;
+
+.xx {
+    text-align: start;
     padding-left: 10px;
 }
-.xx p{
+
+.xx p {
     color: blue;
 }
-.xx span{
+
+.xx span {
     display: flex;
     align-items: center;
     gap: 5px;
 }
-.xx span img{
+
+.xx span img {
     width: 20px;
 
 }
-.contact-box img{
+
+.contact-box img {
     width: 40px;
     cursor: pointer;
 }
+
+
+
 @media(max-width:992px) {
     .user-card-box {
         gap: 10px;
@@ -267,16 +283,19 @@
         padding: 0;
     }
 }
-@media(max-width:550px){
-    .contact-box{
+
+@media(max-width:550px) {
+    .contact-box {
         width: 90vw;
     }
 }
+
 @media(max-width:350px) {
 
     .user-card,
     .user-card-edit,
-    .user-card-delete {
+    .user-card-delete,
+    .user-card-connect {
         width: 15rem;
         height: 8rem;
         font-size: smaller;
@@ -300,21 +319,25 @@
     .card-head h5 {
         font-size: 1rem;
     }
-    input{
+
+    input {
         width: 80vw;
-        font-size:medium;
+        font-size: medium;
         /* height: ; */
     }
-    .edit{
+
+    .edit {
         padding-inline: 2px;
     }
-    .box{
+
+    .box {
         display: flex;
         flex-direction: column;
         align-items: start;
         padding: 0;
     }
-    .box input{
+
+    .box input {
         margin: 0;
     }
 }
