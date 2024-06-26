@@ -29,21 +29,21 @@ const AdminDashboars = () => {
     useEffect(() => {
         const getcourtnumber = async () => {
             try {
-                // const courts = await axios.get('https://new-be-u7li.onrender.com/court')
-                // https://new-be-u7li.onrender.com
-                const courts = await axios.get('https://new-be-u7li.onrender.com/court')
+                // const courts = await axios.get('https://projectbe-1-91ol.onrender.com/court')
+                // https://projectbe-1-91ol.onrender.com
+                const courts = await axios.get('https://projectbe-1-91ol.onrender.com/court')
 
                 console.log('courts', courts.data.length);
                 setNocourt(courts.data.length)
                 setcourtz(courts.data)
 
-                // const users = await axios.get('https://new-be-u7li.onrender.com/usercount')
-                const users = await axios.get('https://new-be-u7li.onrender.com/usercount')
+                // const users = await axios.get('https://projectbe-1-91ol.onrender.com/usercount')
+                const users = await axios.get('https://projectbe-1-91ol.onrender.com/usercount')
 
                 setusers(users.data)
                 console.log(users);
-                // const orders = await axios.get('https://new-be-u7li.onrender.com/Order')
-                const orders = await axios.get('https://new-be-u7li.onrender.com/Order')
+                // const orders = await axios.get('https://projectbe-1-91ol.onrender.com/Order')
+                const orders = await axios.get('https://projectbe-1-91ol.onrender.com/Order')
 
                 console.log(orders);
                 setOrders(orders.data)
@@ -57,7 +57,7 @@ const AdminDashboars = () => {
 
     const deletecourt = async (id) => {
         try {
-            const deleting = await axios.delete(`https://new-be-u7li.onrender.com/court/${id}`)
+            const deleting = await axios.delete(`https://projectbe-1-91ol.onrender.com/court/${id}`)
             setAlertbox({
                 status: 'success',
                 title: 'Success!',
