@@ -32,7 +32,7 @@ const HomePage = () => {
         <div className='d-flex justify-content-center flex-wrap gap-4 pt-2'>
         {courts.length > 0 ? courts.map((data, index) => (
             <Card key={index} style={{ width: '15rem' }} className='text-center d-flex justify-content-center'>
-                <Card.Img style={{ width: '10rem', height: '10rem', alignSelf: 'center' }}
+                <Card.Img style={{ width: '15rem', height: '10rem', alignSelf: 'center' }}
                     variant="center"
                     src={data.pics[0]} />
                 <Card.Body>

@@ -16,7 +16,11 @@ const UserSignin = ({ setAuth }) => {
     const onsubmit = async (data) => {
         console.log(data);
         try {
-            const Signin = await axios.post("https://turfhubbe.onrender.com", data)
+            const Signin = await axios.post("https://turfhubbe.onrender.com", data,{
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
             // const Signin = await axios.post("https://turfhubbe.onrender.com", data)
 
             console.log(Signin.data.data);

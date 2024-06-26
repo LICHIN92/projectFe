@@ -134,7 +134,7 @@ const Mycourt = () => {
                         <Card style={{ width: '18rem' }} key={court._id}>
                             <Card.Img variant="top"
                                 src={court.pics[0]} alt={court.CourtName}
-                                style={{ width: '10rem', height: '10rem', alignSelf: 'center' }}
+                                style={{ width: '18rem', height: '10rem', alignSelf: 'center' }}
                             />
                             <Card.Body>
                                 <Card.Title>{court.CourtName}</Card.Title>
