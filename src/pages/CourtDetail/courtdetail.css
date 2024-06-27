@@ -228,6 +228,7 @@
 .slotselected{
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 4px;
     padding: 2px;
 }
@@ -238,8 +239,13 @@
     padding: 2px;
     color: white; 
 }
+#availableSlot{
+    display: flex;
+    flex-wrap: wrap;
+}
 .point{
     cursor: pointer;
+    /* width: 50px; */
 }
 @media (max-width: 300px) {
     .sports {
@@ -251,5 +257,10 @@
     .sports-available {
         justify-content: center;
         gap: 5px;
+    }
+}
+@media(max-width:400px){
+    .calender-input{
+        width: 95%;
     }
 }

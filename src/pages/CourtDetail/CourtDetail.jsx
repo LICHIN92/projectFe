@@ -44,7 +44,7 @@ const CourtDetail = () => {
   const fetchSlotData = async () => {
     const Id = court._id;
     try {                               
-      const response = await axios.get('https://turfhubbe.onrender.com/Slot/', {
+      const response = await axios.get('http://localhost:3000/Slot/', {
         params: {
           date: selectedDate,
           id: Id
@@ -91,7 +91,7 @@ const CourtDetail = () => {
       }
 
       const slotIds = selectedSlots.map((ele) => ele._id);
-      const orderResponse = await axios.post('https://turfhubbe.onrender.com/Order', {
+      const orderResponse = await axios.post('http://localhost:3000/Order', {
         amount: price,
         currency: 'INR',
         slotId: slotIds,
@@ -128,7 +128,7 @@ const CourtDetail = () => {
             date: selectedDate
           };
           try {
-            const result = await axios.post('https://turfhubbe.onrender.com/Order/verify', data, {
+            const result = await axios.post('http://localhost:3000/Order/verify', data, {
               headers: {
                 "Authorization": `Bearer ${token}`
               }
@@ -139,19 +139,24 @@ const CourtDetail = () => {
               title: 'Success!',
               description: result.data.msg
             });
+
+            
             setTimeout(() => {
               setAlertbox(null)
 
             }, 5000);
+
+            
 
           } catch (error) {
             console.error("Error verifying payment:", error);
           }
 
           setModalOpen(false);
+          
         }
       };
-
+        
       const paymentObject = new window.Razorpay(options);
       paymentObject.open();
     }
@@ -231,7 +236,7 @@ const CourtDetail = () => {
             <input
               type="date"
               id="selectDate"
-              className='px-2 border rounded-1'
+              className='calender-input px-2 border rounded-1'
               min={new Date().toISOString().split('T')[0]}
               onChange={(e) => setSelectedDate(e.target.value)}
             />
