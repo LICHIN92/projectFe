@@ -20,12 +20,12 @@ const UserSignup = ({ setAuth }) => {
 
   const onsubmit = async (data) => {
     try {
-      const signup = await axios.post('http://localhost:3000/signup', data,{
+      const signup = await axios.post('https://projectbe-hqct.onrender.com/signup', data,{
         headers: {
             'Content-Type': 'application/json',
         }
     })
-      // const signup = await axios.post('http://localhost:3000/signup', data)
+      // const signup = await axios.post('https://projectbe-hqct.onrender.com/signup', data)
 
       console.log(signup.data.message);
       if(signup.data.message==='User created successfully'){
