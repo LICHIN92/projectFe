@@ -27,6 +27,7 @@ const UserSignin = ({ setAuth }) => {
                 console.log(Signin.data);
                 const token = Signin.data.token
                 await localStorage.setItem('token', token)
+                sessionStorage.setItem('token',token)
                 const userData = await jwtDecode(token)._doc
                 dispatch(setUserData(userData))
                 console.log(userData.role);
