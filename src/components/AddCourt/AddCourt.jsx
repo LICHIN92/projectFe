@@ -122,7 +122,7 @@ const AddCourt = () => {
                 console.log(selectedFiles.length);
                 if (selectedFiles.length > 0) {
                     console.log(data);
-                    const token = localStorage.getItem('token');
+                    const token = sessionStorage.getItem('token');
                     const response = await axios.post("https://projectbe-hqct.onrender.com/admin", formData, {
                         headers: {
                             "Content-Type": "multipart/form-data",

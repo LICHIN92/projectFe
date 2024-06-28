@@ -89,7 +89,7 @@ const Mycourt = () => {
         console.log(court);
         console.log(selectedSlots);
         console.log(DateRangeState);
-        const token = localStorage.getItem('token')
+        const token = sessionStorage.getItem('token')
         try {
             const createSlot = await axios.post(`https://projectbe-hqct.onrender.com/Slot/${court._id}`,
                 {

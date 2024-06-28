@@ -1,7 +1,7 @@
 // import { createSlice } from "@reduxjs/toolkit";
 // import { jwtDecode } from "jwt-decode";
 
-// const token=localStorage.getItem("token")
+// const token=sessionStorage.getItem("token")
 // const USER=token ? jwtDecode(token)._doc : null;
 // // Initial state
 // const INITIAL_STATE = {
@@ -32,10 +32,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {jwtDecode} from "jwt-decode";
 
-const token = localStorage.getItem("token");
+const token = sessionStorage.getItem("token");
 
 const USER = token ? jwtDecode(token)._doc : null;
-// const USER=JSON.parse(localStorage.getItem('user'))|| {}
+// const USER=JSON.parse(sessionStorage.getItem('user'))|| {}
 
 const INITIAL_STATE = {
   user: USER || {} 

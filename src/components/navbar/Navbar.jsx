@@ -7,7 +7,7 @@
 // import { clearUserData } from '../../redux/userSlice';
 
 // const Navbar = () => {
-//     const token = localStorage.getItem("token")
+//     const token = sessionStorage.getItem("token")
 //     const decoded = jwtDecode(token)
 //     const navigate=useNavigate
 //     console.log(token);   
@@ -15,7 +15,7 @@
 //     const { user } = useSelector(state => state.user)
 //     console.log(user.firstName);
 //     const Logout = () => {
-//         localStorage.removeItem('token')
+//         sessionStorage.removeItem('token')
 //         dispatch(clearUserData())
 //         navigate('/')
 //     }
@@ -110,10 +110,10 @@ const Navbar = () => {
     const dispatch = useDispatch();
     const { user } = useSelector(state => state.user);
 
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     console.log(user);
     const Logout = () => {
-        localStorage.removeItem('token');
+        sessionStorage.removeItem('token');
         dispatch(clearUserData());
         navigate('/');
     };

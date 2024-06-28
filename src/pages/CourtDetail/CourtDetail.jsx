@@ -81,9 +81,15 @@ const CourtDetail = () => {
     });
   };
 
+const booknowFunction=()=>{
+  setModalOpen(true)
+  setSelectedSlots([])
+  setAvailableSlots([])
+}
+
   const handleBooking = async () => {
     if (selectedSlots.length > 0) {
-      const token = localStorage.getItem('token');
+      const token = sessionStorage.getItem('token');
       const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
       if (!res) {
         alert("Razorpay SDK failed to load. Are you online?");
@@ -154,7 +160,19 @@ const CourtDetail = () => {
 
           setModalOpen(false);
           
-        }
+        },
+        
+        prefill: {
+          name: "Soumya Dey",
+          email: "SoumyaDey@example.com",
+          contact: "9999999999",
+      },
+      notes: {
+          address: "Soumya Dey Corporate Office",
+      },
+      theme: {
+          color: "#61dafb",
+      },
       };
         
       const paymentObject = new window.Razorpay(options);
@@ -212,7 +230,7 @@ const CourtDetail = () => {
           </div>
         </div>
         <div className="court-book col-lg-4">
-          <button className="text-capitalize" onClick={() => setModalOpen(true)}>Book Now</button>
+          <button className="text-capitalize" onClick={() =>booknowFunction()}>Book Now</button>
           <div className='border rounded-2 mt-2 px-3'>
             <h5 className='mt-2'>Price:</h5>
             <p className='fw-bold'>{court.Price}<small>/Hour</small></p>
@@ -264,7 +282,7 @@ const CourtDetail = () => {
             )}
           </div>
           <div className='p-1 d-flex justify-content-center flex-wrap'>
-            <button className='btn btn-info mx-2' onClick={handleBooking}>Book</button>
+            <button className='btn btn-info mx-2 text-white' onClick={handleBooking}>Pay Now</button>
             <button className='btn btn-secondary' onClick={() => setModalOpen(false)}>Cancel</button>
           </div>
         </Bookmodal>

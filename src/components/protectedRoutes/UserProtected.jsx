@@ -3,7 +3,7 @@
 // import { Navigate, useNavigate } from 'react-router-dom';
 
 // const UserProtected = ({ children }) => {
-//   const token = localStorage.getItem('token');
+//   const token = sessionStorage.getItem('token');
 //   const navigate=useNavigate()
 //   const decoded = jwtDecode(token)
 //   const currentTime = Date.now() / 1000;
@@ -12,8 +12,8 @@
 //   }
 //   console.log(currentTime>=decoded.exp)
 //   if(currentTime>=decoded.exp){
-//     localStorage.removeItem(token)
-//     // localStorage.clear(token)
+//     sessionStorage.removeItem(token)
+//     // sessionStorage.clear(token)
 //     navigate('/')
 //     return
 //   }
@@ -27,7 +27,8 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import {jwtDecode} from 'jwt-decode';
 
 const UserProtected = ({ children }) => {
-  const token = localStorage.getItem('token');
+  // const token = sessionStorage.getItem('token');
+  const token=sessionStorage.getItem('token')
   const navigate = useNavigate();
   
   useEffect(() => {
@@ -42,9 +43,10 @@ const UserProtected = ({ children }) => {
     console.log(decoded);
 
     if (currentTime >= decoded.exp) {
-
-      localStorage.removeItem('token');
-      localStorage.clear(token)
+      sessionStorage.removeItem('token')
+      sessionStorage.clear('token')
+      sessionStorage.removeItem('token');
+      sessionStorage.clear(token)
       return  navigate('/');
     }
   }, [token, navigate]);

@@ -27,11 +27,10 @@ const UserSignin = ({ setAuth }) => {
                 console.log(Signin.data);
                 const token = Signin.data.token
                 sessionStorage.setItem('token',token)
-                localStorage.setItem('token', sessionStorage.getItem('token'))
+                sessionStorage.setItem('token', token)
                 const userData = await jwtDecode(token)._doc
                 dispatch(setUserData(userData))
                 console.log(userData.role);
-                console.log("cookies",document.cookie);
 
                 navigate('/home')
             }

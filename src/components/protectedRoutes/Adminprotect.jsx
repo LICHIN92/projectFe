@@ -3,7 +3,7 @@
 // import { jwtDecode } from 'jwt-decode'
 // import { Navigate } from 'react-router-dom'
 // const Adminprotect = ({ children }) => {
-//     const token = localStorage.getItem('token')
+//     const token = sessionStorage.getItem('token')
 //     const decodedToken = jwtDecode(token)
 //     const { user } = useSelector(store => store.user)
 //     const role = user.role
@@ -21,7 +21,8 @@ import {jwtDecode} from 'jwt-decode';
 import { Navigate } from 'react-router-dom';
 
 const AdminProtect = ({ children }) => {
-    const token = localStorage.getItem('token');
+    // const token = sessionStorage.getItem('token');
+    const token=sessionStorage.getItem('token')
     
     if (!token) {
         return <Navigate to={'/'} replace />;

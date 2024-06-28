@@ -3,7 +3,8 @@ import { Navigate } from 'react-router-dom'
 
 const Authprotect = ({children}) => {
   
-    const token=localStorage.getItem('token')
+   //  const token=sessionStorage.getItem('token')
+    const token=sessionStorage.getItem('token')
     if(token){
        return <Navigate to='/home' replace/>;
     }

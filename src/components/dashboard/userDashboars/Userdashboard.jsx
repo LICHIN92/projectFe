@@ -77,7 +77,7 @@ const Userdashboard = () => {
                 description: deleting.data
             });
             setTimeout(() => {
-                localStorage.removeItem('token');
+                sessionStorage.removeItem('token');
                 dispatch(clearUserData());
                 navigate('/');
             }, 2000);
@@ -93,7 +93,7 @@ const Userdashboard = () => {
     const onsubmit = async (data) => {
         console.log(data);
         try {
-            const token = localStorage.getItem('token');
+            const token = sessionStorage.getItem('token');
             const edit = await axios.patch(`https://projectbe-hqct.onrender.com/updates/${id}`, data, {
                 headers: {
                     "Authorization": `Bearer ${token}`
