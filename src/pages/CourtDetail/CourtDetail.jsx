@@ -43,7 +43,7 @@ const CourtDetail = () => {
 
   const fetchSlotData = async () => {
     const Id = court._id;
-    try {                               
+    try {
       const response = await axios.get('https://projectbe-hqct.onrender.com/Slot/', {
         params: {
           date: selectedDate,
@@ -71,21 +71,134 @@ const CourtDetail = () => {
     setPrice(selectedSlots.length * court.Price);
   }, [selectedSlots, court.Price]);
 
+  // const loadScript = (src) => {
+  //   return new Promise((resolve) => {
+  //     const script = document.createElement("script");
+  //     script.src = src;
+  //     script.onload = () => resolve(true);
+  //     script.onerror = () => resolve(false);
+  //     document.body.appendChild(script);
+  //   });
+  // };
+
   const loadScript = (src) => {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       const script = document.createElement("script");
       script.src = src;
-      script.onload = () => resolve(true);
-      script.onerror = () => resolve(false);
+      script.onload = () => {
+        console.log("Razorpay SDK loaded");
+        resolve(true);
+      };
+      script.onerror = () => {
+        console.log("Razorpay SDK failed to load");
+        resolve(false);
+      };
       document.body.appendChild(script);
     });
   };
+  
+  
+  const booknowFunction = () => {
+    setModalOpen(true)
+    setSelectedSlots([])
+    setAvailableSlots([])
+  }
 
-const booknowFunction=()=>{
-  setModalOpen(true)
-  setSelectedSlots([])
-  setAvailableSlots([])
-}
+  // const handleBooking = async () => {
+  //   if (selectedSlots.length > 0) {
+  //     const token = sessionStorage.getItem('token');
+  //     const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
+  //     if (!res) {
+  //       alert("Razorpay SDK failed to load. Are you online?");
+  //       return;
+  //     }
+
+  //     const slotIds = selectedSlots.map((ele) => ele._id);
+  //     const orderResponse = await axios.post('https://projectbe-hqct.onrender.com/Order', {
+  //       amount: price,
+  //       currency: 'INR',
+  //       slotId: slotIds,
+  //       courtId: court._id
+  //     }, {
+  //       headers: {
+  //         "Authorization": `Bearer ${token}`
+  //       }
+  //     });
+
+  //     if (!orderResponse) {
+  //       alert("Server error. Are you online?");
+  //       return;
+  //     }
+  //     console.log(orderResponse.data);
+  //     const { amount, id: order_id, currency, receipt } = orderResponse.data;
+  //     const key = import.meta.env.VITE_RP_KEY_ID;
+  //     const options = {
+  //       key,
+  //       amount: amount.toString(),
+  //       currency,
+  //       name: "Turf_hub Pvt.Ltd",
+  //       description: "Booking Payment",
+  //       order_id,
+  //       handler: async (response) => {
+  //         const data = {
+  //           orderCreationId: order_id,
+  //           razorpayPaymentId: response.razorpay_payment_id,
+  //           razorpayOrderId: response.razorpay_order_id,
+  //           razorpaySignature: response.razorpay_signature,
+  //           receipt,
+  //           slotIds,
+  //           courtId: court._id,
+  //           date: selectedDate
+  //         };
+  //         try {
+  //           const result = await axios.post('https://projectbe-hqct.onrender.com/Order/verify', data, {
+  //             headers: {
+  //               "Authorization": `Bearer ${token}`
+  //             }
+  //           });
+  //           console.log(result);
+  //           setAlertbox({
+  //             status: 'success',
+  //             title: 'Success!',
+  //             description: result.data.msg
+  //           });
+
+
+  //           setTimeout(() => {
+  //             setAlertbox(null)
+
+  //           }, 5000);
+
+
+
+  //         } catch (error) {
+  //           console.error("Error verifying payment:", error);
+  //         }
+
+  //         setModalOpen(false);
+
+  //       },
+
+  //       prefill: {
+  //         name: "Soumya Dey",
+  //         email: "SoumyaDey@example.com",
+  //         contact: "9999999999",
+  //       },
+  //       notes: {
+  //         address: "Soumya Dey Corporate Office",
+  //       },
+  //       theme: {
+  //         color: "#61dafb",
+  //       },
+  //     };
+
+  //     const paymentObject = new window.Razorpay(options);
+  //     paymentObject.open();
+  //   }
+  //   else {
+  //     alert('Please select Slot')
+  //   }
+  // };
 
   const handleBooking = async () => {
     if (selectedSlots.length > 0) {
@@ -95,93 +208,92 @@ const booknowFunction=()=>{
         alert("Razorpay SDK failed to load. Are you online?");
         return;
       }
-
+  
       const slotIds = selectedSlots.map((ele) => ele._id);
-      const orderResponse = await axios.post('https://projectbe-hqct.onrender.com/Order', {
-        amount: price,
-        currency: 'INR',
-        slotId: slotIds,
-        courtId: court._id
-      }, {
-        headers: {
-          "Authorization": `Bearer ${token}`
-        }
-      });
-
-      if (!orderResponse) {
-        alert("Server error. Are you online?");
-        return;
-      }
-      console.log(orderResponse.data);
-      const { amount, id: order_id, currency, receipt } = orderResponse.data;
-      const key = import.meta.env.VITE_RP_KEY_ID;
-      const options = {
-        key,
-        amount: amount.toString(),
-        currency,
-        name: "Turf_hub Pvt.Ltd",
-        description: "Booking Payment",
-        order_id,
-        handler: async (response) => {
-          const data = {
-            orderCreationId: order_id,
-            razorpayPaymentId: response.razorpay_payment_id,
-            razorpayOrderId: response.razorpay_order_id,
-            razorpaySignature: response.razorpay_signature,
-            receipt,
-            slotIds,
-            courtId: court._id,
-            date: selectedDate
-          };
-          try {
-            const result = await axios.post('https://projectbe-hqct.onrender.com/Order/verify', data, {
-              headers: {
-                "Authorization": `Bearer ${token}`
-              }
-            });
-            console.log(result);
-            setAlertbox({
-              status: 'success',
-              title: 'Success!',
-              description: result.data.msg
-            });
-
-            
-            setTimeout(() => {
-              setAlertbox(null)
-
-            }, 5000);
-
-            
-
-          } catch (error) {
-            console.error("Error verifying payment:", error);
+      try {
+        const orderResponse = await axios.post('https://projectbe-hqct.onrender.com/Order', {
+          amount: price,
+          currency: 'INR',
+          slotId: slotIds,
+          courtId: court._id
+        }, {
+          headers: {
+            "Authorization": `Bearer ${token}`
           }
-
-          setModalOpen(false);
-          
-        },
-        
-        prefill: {
-          name: "Soumya Dey",
-          email: "SoumyaDey@example.com",
-          contact: "9999999999",
-      },
-      notes: {
-          address: "Soumya Dey Corporate Office",
-      },
-      theme: {
-          color: "#61dafb",
-      },
-      };
-        
-      const paymentObject = new window.Razorpay(options);
-      paymentObject.open();
-    }
-    else {
-      alert('Please select Slot')
+        });
+  
+        if (!orderResponse) {
+          alert("Server error. Are you online?");
+          return;
+        }
+  
+        console.log(orderResponse.data);
+        const { amount, id: order_id, currency, receipt } = orderResponse.data;
+        const key = import.meta.env.VITE_RP_KEY_ID;
+  
+        const options = {
+          key,
+          amount: amount.toString(),
+          currency,
+          name: "Turf_hub Pvt.Ltd",
+          description: "Booking Payment",
+          order_id,
+          handler: async (response) => {
+            const data = {
+              orderCreationId: order_id,
+              razorpayPaymentId: response.razorpay_payment_id,
+              razorpayOrderId: response.razorpay_order_id,
+              razorpaySignature: response.razorpay_signature,
+              receipt,
+              slotIds,
+              courtId: court._id,
+              date: selectedDate
+            };
+            try {
+              const result = await axios.post('https://projectbe-hqct.onrender.com/Order/verify', data, {
+                headers: {
+                  "Authorization": `Bearer ${token}`
+                }
+              });
+              console.log(result);
+              setAlertbox({
+                status: 'success',
+                title: 'Success!',
+                description: result.data.msg
+              });
+  
+              setTimeout(() => {
+                setAlertbox(null)
+              }, 5000);
+            } catch (error) {
+              console.error("Error verifying payment:", error);
+            }
+  
+            setModalOpen(false);
+          },
+          prefill: {
+            name: "LICHIN.C",
+            email: "SoumyaDey@example.com",
+            contact: "9999999999",
+          },
+          notes: {
+            address: "Soumya Dey Corporate Office",
+          },
+          theme: {
+            color: "#61dafb",
+          },
+        };
+  
+        const paymentObject = new window.Razorpay(options);
+        paymentObject.open();
+      } catch (error) {
+        console.error("Error creating order:", error);
+      }
+    } else {
+      alert('Please select Slot');
     }
   };
+  
 
 
   if (!court) {
@@ -230,7 +342,7 @@ const booknowFunction=()=>{
           </div>
         </div>
         <div className="court-book col-lg-4">
-          <button className="text-capitalize" onClick={() =>booknowFunction()}>Book Now</button>
+          <button className="text-capitalize" onClick={() => booknowFunction()}>Book Now</button>
           <div className='border rounded-2 mt-2 px-3'>
             <h5 className='mt-2'>Price:</h5>
             <p className='fw-bold'>{court.Price}<small>/Hour</small></p>

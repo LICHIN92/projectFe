@@ -19,13 +19,16 @@ const UserSignin = ({ setAuth }) => {
             const Signin = await axios.post("https://projectbe-hqct.onrender.com", data,{
                 headers: {
                     'Content-Type': 'application/json',
-                }
+                },
+                withCredentials: true
             })
 
             console.log(Signin.data.data);
             if (Signin.data.data === 'Signin successful') {
+                console.log(document.cookie);
                 console.log(Signin.data);
                 const token = Signin.data.token
+                console.log(Signin);
                 sessionStorage.setItem('token',token)
                 sessionStorage.setItem('token', token)
                 const userData = await jwtDecode(token)._doc
