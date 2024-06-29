@@ -29,7 +29,6 @@ const UserSignin = ({ setAuth }) => {
                 console.log(Signin.data);
                 const token = Signin.data.token
                 console.log(Signin);
-                sessionStorage.setItem('token',token)
                 sessionStorage.setItem('token', token)
                 const userData = await jwtDecode(token)._doc
                 dispatch(setUserData(userData))
