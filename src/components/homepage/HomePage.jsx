@@ -31,7 +31,7 @@ const HomePage = () => {
     return (
         <div className='d-flex justify-content-center flex-wrap gap-4 pt-2'>
         {courts.length > 0 ? courts.map((data, index) => (
-            <Card key={index} style={{ width: '15rem' }} className='text-center d-flex justify-content-center'>
+            <Card  onClick={()=>courtdetails(data._id)} key={index} style={{ width: '15rem' }} className='text-center d-flex justify-content-center mt-1 '>
                 <Card.Img style={{ width: '15rem', height: '10rem', alignSelf: 'center' }}
                     variant="center"
                     src={data.pics[0]} />
@@ -39,8 +39,9 @@ const HomePage = () => {
                     <Card.Title>{data.CourtName}</Card.Title>
                     <Card.Text>
                         {/* Add any additional text or details here */}
+                        <span className='text-capitalize'>{data.Location}</span>
                     </Card.Text>
-                    <Button variant="secondary" onClick={()=>courtdetails(data._id)}>view court</Button>
+                    {/* <Button variant="secondary" onClick={()=>courtdetails(data._id)}>view court</Button> */}
                 </Card.Body>
             </Card>
         )) : 

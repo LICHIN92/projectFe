@@ -90,45 +90,55 @@ const Mycourt = () => {
         console.log(selectedSlots);
         console.log(DateRangeState);
         const token = sessionStorage.getItem('token')
-        try {
-            const createSlot = await axios.post(`https://projectbe-hqct.onrender.com/Slot/${court._id}`,
-                {
-                    startDate: DateRangeState.startDate,
-                    endDate: DateRangeState.endDate,
-                    selectedSlot: selectedSlots
-                }, {
-                headers: {
-                    "Authorization": `Bearer ${token}`
+        if (DateRangeState.startDate) {
+            if (selectedSlots.length>0) {
+                try {
+                    const createSlot = await axios.post(`https://projectbe-hqct.onrender.com/Slot/${court._id}`,
+                        {
+                            startDate: DateRangeState.startDate,
+                            endDate: DateRangeState.endDate,
+                            selectedSlot: selectedSlots
+                        }, {
+                        headers: {
+                            "Authorization": `Bearer ${token}`
+                        }
+                    }
+                    )
+                    console.log(createSlot);
+                    SetTimeSlot(false)
+                    setAlertbox({
+                        status: 'success',
+                        title: 'Success!',
+                        description: createSlot.data.message
+                    });
+                    setTimeout(() => { setAlertbox(null) }, 4000);
+                } catch (error) {
+                    console.log(error);
+                    alert(error.response.data)
                 }
+
+            } else {
+                alert('Please Select Slot')
             }
-            )
-            console.log(createSlot);
-            SetTimeSlot(false)
-            setAlertbox({
-                status: 'success',
-                title: 'Success!',
-                description: createSlot.data.message
-            });
-            setTimeout(() => { setAlertbox(null) }, 4000);
-        } catch (error) {
-            console.log(error);
-            alert(error.response.data)
+        }else{
+            alert('pleade select Date')
         }
+
     }
     return (
         <div>
             <h1>My Court</h1>
             {alertbox && (
-                    <Stack spacing={3} mb={4}>
-                        <Alert status={alertbox.status} variant='subtle'>
-                            <AlertIcon />
-                            <AlertTitle>{alertbox.title}</AlertTitle>
-                            <AlertDescription>{alertbox.description}</AlertDescription>
-                        </Alert>
-                    </Stack>
-                )}
+                <Stack spacing={3} mb={4}>
+                    <Alert status={alertbox.status} variant='subtle'>
+                        <AlertIcon />
+                        <AlertTitle>{alertbox.title}</AlertTitle>
+                        <AlertDescription>{alertbox.description}</AlertDescription>
+                    </Alert>
+                </Stack>
+            )}
             <div className='d-flex flex-wrap gap-3 px-3'>
-               
+
                 {MyCourt && MyCourt.length > 0 ? (
                     MyCourt.map(court => (
                         <Card style={{ width: '18rem' }} key={court._id}>

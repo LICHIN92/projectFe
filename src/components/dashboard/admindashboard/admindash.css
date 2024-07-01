@@ -147,7 +147,12 @@
     border-radius: 5px;
     padding: 2px;
     font-size: small;
-    /* margin-left: 0px; */
+    cursor: pointer;
+    background-color: #e02f17;
+    border: 1px solid  #e02f17;
+}
+.delete-span:hover{
+    background-color: #DE4B39;
 }
 @media(max-width:767px) {
     .options {

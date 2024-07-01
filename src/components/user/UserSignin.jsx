@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setUserData } from '../../redux/userSlice';
 import { jwtDecode } from 'jwt-decode';
-// import Cookies from 'cookies.js'
+// import {Cookies} from 'js-cookie'
 
 const UserSignin = ({ setAuth }) => {
     const navigate = useNavigate();
@@ -25,7 +25,7 @@ const UserSignin = ({ setAuth }) => {
 
             console.log(Signin.data.data);
             if (Signin.data.data === 'Signin successful') {
-                console.log(document.cookie);
+                // console.log(Cookies.get('token'));
                 console.log(Signin.data);
                 const token = Signin.data.token
                 console.log(Signin);

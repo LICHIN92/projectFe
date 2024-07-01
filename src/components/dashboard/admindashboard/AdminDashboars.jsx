@@ -53,8 +53,13 @@ const AdminDashboars = () => {
             }
         }
         getcourtnumber()
-    }, [])
-
+    }, [NoCourts])
+    const callfunction = () => {
+        setAlertbox(null);
+        setNocourt(NoCourts-1)
+        getcourtnumber();
+        setdash(0);
+    }
     const deletecourt = async (id) => {
         try {
             const deleting = await axios.delete(`https://projectbe-hqct.onrender.com/court/${id}`)
@@ -63,12 +68,8 @@ const AdminDashboars = () => {
                 title: 'Success!',
                 description: deleting.data.message
             });
-            setTimeout(() => {
-                getcourtnumber();
-                setdash(0);
-                setAlertbox(null);
-              }, 3000);
-            
+            setTimeout(() => { callfunction() }, 3000);
+
             console.log(deleting.data);
         } catch (error) {
             console.log(error);
@@ -77,15 +78,15 @@ const AdminDashboars = () => {
 
     return (
         <div className='dashboard row '>
-             {alertbox && (
-                    <Stack spacing={3} mb={4}>
-                        <Alert status={alertbox.status} variant='subtle'>
-                            <AlertIcon />
-                            <AlertTitle>{alertbox.title}</AlertTitle>
-                            <AlertDescription>{alertbox.description}</AlertDescription>
-                        </Alert>
-                    </Stack>
-                )}
+            {alertbox && (
+                <Stack spacing={3} mb={4}>
+                    <Alert status={alertbox.status} variant='subtle'>
+                        <AlertIcon />
+                        <AlertTitle>{alertbox.title}</AlertTitle>
+                        <AlertDescription>{alertbox.description}</AlertDescription>
+                    </Alert>
+                </Stack>
+            )}
             <div className='options col-md-2 '>
                 <div className='optionbar d-flex '>
                     <span className='p-1 togglebar' onClick={togglebar}> <FaAlignJustify style={{ color: 'black', fontSize: '24px' }} />
@@ -237,7 +238,7 @@ const AdminDashboars = () => {
                             <tr className='ps-2'>
                                 <th className='ms-2'> {index + 1}</th>
                                 <th className='ps-lg-1 py-2'>{item.CourtName}</th>
-                                <th > <span className='delete-span text-bg-danger' onClick={() => deletecourt(item._id)}> Delete</span></th>
+                                <th > <span className='delete-span ' onClick={() => deletecourt(item._id)}> Delete</span></th>
                             </tr>
                         ))}
 

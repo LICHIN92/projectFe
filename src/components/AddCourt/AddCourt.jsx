@@ -14,6 +14,9 @@ import {
     AlertDescription,
     Stack,
 } from '@chakra-ui/react'
+import { useDispatch, useSelector } from 'react-redux';
+import { showOrHideLoader } from '../../redux/loaderSlice';
+import Loader from '../Loader/Loader';
 const AddCourt = () => {
     const sportsOptions = [
         'Basketball',
@@ -32,6 +35,8 @@ const AddCourt = () => {
     const [alertbox, setAlert] = useState(null)
     const navigate = useNavigate()
     const fileInputRef = useRef();
+    const dispatch=useDispatch()
+    const loading=useSelector(state=>state.loading.showloader)
 
     // const handleCheckBoxChange = (list,setList,item) => {
     //     const updatedList = list.includes(item)
@@ -121,6 +126,7 @@ const AddCourt = () => {
             if (selectedSports.length > 0) {
                 console.log(selectedFiles.length);
                 if (selectedFiles.length > 0) {
+                    dispatch(showOrHideLoader(true))
                     console.log(data);
                     const token = sessionStorage.getItem('token');
                     const response = await axios.post("https://projectbe-hqct.onrender.com/admin", formData, {
@@ -132,12 +138,13 @@ const AddCourt = () => {
                     
                     
                     console.log(response);
+                    dispatch(showOrHideLoader(false))
                     setAlert({
                         status: 'success',
                         title: 'Success!',
                         description: response.data.data
                     });
-                    setTimeout(() => navigate('/home'), 3000)
+                    setTimeout(() => navigate('/home'), 4000)
                 } else {
                     alert('please select court Images')
                 }
@@ -155,134 +162,138 @@ const AddCourt = () => {
 
     return (
         <div className='container-fluid addcourt p-md-2'>
-            <div className='row p-sm-1  p-md-3 '>
-                <h1 className='add_heading'>Add New Court</h1>
+            {loading && <Loader />}
+            {!loading &&
+             <div className='row p-sm-1  p-md-3 '>
+             <h1 className='add_heading'>Add New Court</h1>
 
-                {alertbox && (
-                    <Stack spacing={3} mb={4}>
-                        <Alert status={alertbox.status} variant='subtle'>
-                            <AlertIcon />
-                            <AlertTitle>{alertbox.title}</AlertTitle>
-                            <AlertDescription>{alertbox.description}</AlertDescription>
-                        </Alert>
-                    </Stack>
-                )}
+             {alertbox && (
+                 <Stack spacing={3} mb={4}>
+                     <Alert status={alertbox.status} variant='subtle'>
+                         <AlertIcon />
+                         <AlertTitle>{alertbox.title}</AlertTitle>
+                         <AlertDescription>{alertbox.description}</AlertDescription>
+                     </Alert>
+                 </Stack>
+             )}
 
-                <form onSubmit={handleSubmit(onSubmit)} className='row px-lg-5 ms-sm-3 px-md-3'>
-                    <div className='d-flex flex-column col-md-6 col-lg-4 my-2'>
-                        <label htmlFor="courtname">Court Name</label>
-                        <input type="text" {...register('CourtName')} id='courtname' placeholder='Court Name' />
-                        {errors.CourtName && <small className="error">{errors.CourtName.message}</small>}
-                    </div>
-                    <div className='d-flex flex-column col-md-6 col-lg-4 my-2'>
-                        <label htmlFor="courtlocation">Location</label>
-                        <input type="text" {...register('Location')} id='courtlocation' placeholder='Location' />
-                        {errors.Location && <small className="error">{errors.Location.message}</small>}
-                    </div>
-                    <div className='d-flex flex-column col-md-6 col-lg-4 my-2'>
-                        <label htmlFor="contact">Contact Number</label>
-                        <input type="text" {...register('ContactNumber')} id='contact' placeholder='Contact Number' />
-                        {errors.ContactNumber && <small className="error">{errors.ContactNumber.message}</small>}
-                    </div>
-                    <div className='d-flex flex-column col-md-6 col-lg-4 my-2'>
-                        <label htmlFor="courtAddress1">Address Line 1</label>
-                        <input type="text" {...register('AddressLine1')} id='courtAddress1' placeholder='Address Line 1' />
-                        {errors.AddressLine1 && <small className="error">{errors.AddressLine1.message}</small>}
-                    </div>
-                    <div className='d-flex flex-column col-md-6 col-lg-4 my-2'>
-                        <label htmlFor="courtAddress2">Address Line 2</label>
-                        <input type="text" {...register('AddressLine2')} id='courtAddress2' placeholder='Address Line 2' />
-                        {errors.AddressLine2 && <small className="error">{errors.AddressLine2.message}</small>}
-                    </div>
-                    <div className='d-flex flex-column col-md-6 col-lg-4 my-2'>
-                        <label htmlFor="courtAddress3">Address Line 3</label>
-                        <input type="text" {...register('AddressLine3')} id='courtAddress3' placeholder='Address Line 3' />
-                        {errors.AddressLine3 && <small className="error">{errors.AddressLine3.message}</small>}
-                    </div>
-                    <div className='d-flex flex-column col-md-6 col-lg-4 my-2'>
-                        <label htmlFor="landmark">Landmark</label>
-                        <input type="text" {...register('Landmark')} id='landmark' placeholder='Landmark' />
-                        {errors.Landmark && <small className="error">{errors.Landmark.message}</small>}
-                    </div>
-                    <div className='d-flex flex-column col-md-6 col-lg-4 my-2'>
-                        <label htmlFor="courttype">Court Type</label>
-                        <input type="text" {...register('CourtType')} id='courttype' placeholder='Court Type' />
-                        {errors.CourtType && <small className="error">{errors.CourtType.message}</small>}
-                    </div>
-                    <div className='d-flex flex-column col-md-6 col-lg-4 my-2'>
-                        <label htmlFor="price">Price/Hrs</label>
-                        <input type="number" {...register('Price')} id='price' placeholder='Price' />
-                        {errors.Price && <small className="error">{errors.Price.message}</small>}
-                    </div>
-                    <div className='d-flex flex-column my-2'>
-                        <label>Sports Available</label>
-                        <div className='row ms-1 mt-2 row-gap-1'>
-                            {sportsOptions.map((sport, index) => (
-                                <div key={index} className='checkbox '>
-                                    <input type="checkbox" id={`${sport}`} className='check'
-                                        checked={selectedSports.includes(sport)}
-                                        onChange={() => handleCheckBoxChange(selectedSports, setSelectedSports, sport)}
-                                    />
-                                    <label htmlFor={sport} className='label'>{sport}</label>
-                                </div>
-                            ))}
-                        </div>
-                        {selectedSports.length === 0 && <small className="error">Please select at least one sport</small>}
+             <form onSubmit={handleSubmit(onSubmit)} className='row px-lg-5 ms-sm-3 px-md-3'>
+                 <div className='d-flex flex-column col-md-6 col-lg-4 my-2'>
+                     <label htmlFor="courtname">Court Name</label>
+                     <input type="text" {...register('CourtName')} id='courtname' placeholder='Court Name' />
+                     {errors.CourtName && <small className="error">{errors.CourtName.message}</small>}
+                 </div>
+                 <div className='d-flex flex-column col-md-6 col-lg-4 my-2'>
+                     <label htmlFor="courtlocation">Location</label>
+                     <input type="text" {...register('Location')} id='courtlocation' placeholder='Location' />
+                     {errors.Location && <small className="error">{errors.Location.message}</small>}
+                 </div>
+                 <div className='d-flex flex-column col-md-6 col-lg-4 my-2'>
+                     <label htmlFor="contact">Contact Number</label>
+                     <input type="text" {...register('ContactNumber')} id='contact' placeholder='Contact Number' />
+                     {errors.ContactNumber && <small className="error">{errors.ContactNumber.message}</small>}
+                 </div>
+                 <div className='d-flex flex-column col-md-6 col-lg-4 my-2'>
+                     <label htmlFor="courtAddress1">Address Line 1</label>
+                     <input type="text" {...register('AddressLine1')} id='courtAddress1' placeholder='Address Line 1' />
+                     {errors.AddressLine1 && <small className="error">{errors.AddressLine1.message}</small>}
+                 </div>
+                 <div className='d-flex flex-column col-md-6 col-lg-4 my-2'>
+                     <label htmlFor="courtAddress2">Address Line 2</label>
+                     <input type="text" {...register('AddressLine2')} id='courtAddress2' placeholder='Address Line 2' />
+                     {errors.AddressLine2 && <small className="error">{errors.AddressLine2.message}</small>}
+                 </div>
+                 <div className='d-flex flex-column col-md-6 col-lg-4 my-2'>
+                     <label htmlFor="courtAddress3">Address Line 3</label>
+                     <input type="text" {...register('AddressLine3')} id='courtAddress3' placeholder='Address Line 3' />
+                     {errors.AddressLine3 && <small className="error">{errors.AddressLine3.message}</small>}
+                 </div>
+                 <div className='d-flex flex-column col-md-6 col-lg-4 my-2'>
+                     <label htmlFor="landmark">Landmark</label>
+                     <input type="text" {...register('Landmark')} id='landmark' placeholder='Landmark' />
+                     {errors.Landmark && <small className="error">{errors.Landmark.message}</small>}
+                 </div>
+                 <div className='d-flex flex-column col-md-6 col-lg-4 my-2'>
+                     <label htmlFor="courttype">Court Type</label>
+                     <input type="text" {...register('CourtType')} id='courttype' placeholder='Court Type' />
+                     {errors.CourtType && <small className="error">{errors.CourtType.message}</small>}
+                 </div>
+                 <div className='d-flex flex-column col-md-6 col-lg-4 my-2'>
+                     <label htmlFor="price">Price/Hrs</label>
+                     <input type="number" {...register('Price')} id='price' placeholder='Price' />
+                     {errors.Price && <small className="error">{errors.Price.message}</small>}
+                 </div>
+                 <div className='d-flex flex-column my-2'>
+                     <label>Sports Available</label>
+                     <div className='row ms-1 mt-2 row-gap-1'>
+                         {sportsOptions.map((sport, index) => (
+                             <div key={index} className='checkbox '>
+                                 <input type="checkbox" id={`${sport}`} className='check'
+                                     checked={selectedSports.includes(sport)}
+                                     onChange={() => handleCheckBoxChange(selectedSports, setSelectedSports, sport)}
+                                 />
+                                 <label htmlFor={sport} className='label'>{sport}</label>
+                             </div>
+                         ))}
+                     </div>
+                     {selectedSports.length === 0 && <small className="error">Please select at least one sport</small>}
 
-                    </div>
-                    <div className='d-flex flex-column my-2 '>
-                        <div className='d-flex align-items-center gap-2'>
-                            <label htmlFor="amneties">Amenities </label>
-                            <input
-                                type="checkbox"
-                                className='check'
-                                onChange={() => setSetPresence(!SetPresence)}
-                            />
-                        </div>
-                        {SetPresence && (
-                            <div className='row ms-1 mt-2 row-gap-1'>
-                                {AmenitiesOption.map((amenity, index) => (
-                                    <div key={index} className='checkbox'>
-                                        <input type="checkbox" id={`${amenity}`} className='check'
-                                            checked={selectedAmenities.includes(amenity)}
-                                            onChange={() => handleCheckBoxChange(selectedAmenities, SetAmenities, amenity)} />
-                                        <label htmlFor={amenity}>{amenity}</label>
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-                    </div>
-                    <div className='d-flex flex-column  col-md-6 col-lg-12 my-2'>
-                        <label htmlFor="courtImage">Upload image</label>
-                        <input
-                            type="file"
-                            ref={fileInputRef}
+                 </div>
+                 <div className='d-flex flex-column my-2 '>
+                     <div className='d-flex align-items-center gap-2'>
+                         <label htmlFor="amneties">Amenities </label>
+                         <input
+                             type="checkbox"
+                             className='check'
+                             onChange={() => setSetPresence(!SetPresence)}
+                         />
+                     </div>
+                     {SetPresence && (
+                         <div className='row ms-1 mt-2 row-gap-1'>
+                             {AmenitiesOption.map((amenity, index) => (
+                                 <div key={index} className='checkbox'>
+                                     <input type="checkbox" id={`${amenity}`} className='check'
+                                         checked={selectedAmenities.includes(amenity)}
+                                         onChange={() => handleCheckBoxChange(selectedAmenities, SetAmenities, amenity)} />
+                                     <label htmlFor={amenity}>{amenity}</label>
+                                 </div>
+                             ))}
+                         </div>
+                     )}
+                 </div>
+                 <div className='d-flex flex-column  col-md-6 col-lg-12 my-2'>
+                     <label htmlFor="courtImage">Upload image</label>
+                     <input
+                         type="file"
+                         ref={fileInputRef}
 
-                            multiple
-                            accept='image/*'
-                            style={{ display: "none" }}
-                            onChange={handleFileChange}
-                        />
-                        <div className="image-preview d-flex align-items-center gap-3 flex-wrap">
-                            {selectedFiles.map((file, index) => (
-                                file.type.startsWith("image/") && (
-                                    <div className='image_box' key={index}>
-                                        <span className='close' onClick={() => remover(index)} > <img className='close_img' src={close} alt="" /></span>
-                                        <img src={URL.createObjectURL(file)} alt='' height={110} key={index} className='images' />
+                         multiple
+                         accept='image/*'
+                         style={{ display: "none" }}
+                         onChange={handleFileChange}
+                     />
+                     <div className="image-preview d-flex align-items-center gap-3 flex-wrap">
+                         {selectedFiles.map((file, index) => (
+                             file.type.startsWith("image/") && (
+                                 <div className='image_box' key={index}>
+                                     <span className='close' onClick={() => remover(index)} > <img className='close_img' src={close} alt="" /></span>
+                                     <img src={URL.createObjectURL(file)} alt='' height={110} key={index} className='images' />
 
-                                    </div>
-                                )
-                            ))}
-                            <img src={addimage} className='my-2' id='courtImage' style={{ height: '65px', marginLeft: '10px', cursor: "pointer" }} alt="" onClick={handleAddIconClick} />
-                            {errors.files && <small className="error">{errors.files.message}</small>}
-                        </div>
-                    </div>
-                    <div className='d-flex flex-column   my-2'>
-                        <input id='addcourt' type="submit" />
+                                 </div>
+                             )
+                         ))}
+                         <img src={addimage} className='my-2' id='courtImage' style={{ height: '65px', marginLeft: '10px', cursor: "pointer" }} alt="" onClick={handleAddIconClick} />
+                         {errors.files && <small className="error">{errors.files.message}</small>}
+                     </div>
+                 </div>
+                 <div className='d-flex flex-column   my-2'>
+                     <input id='addcourt' type="submit" />
 
-                    </div>
-                </form>
-            </div>
+                 </div>
+             </form>
+         </div>
+            }
+           
         </div>
     );
 };

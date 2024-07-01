@@ -24,6 +24,14 @@
     margin-bottom: 0;
     
 }
+.container-fluid{
+    display: flex;
+    justify-content: space-between;
+}
+.navbar-toggler{
+    border: 2px solid white;
+    background-color: rgb(255, 255, 255,.3);
+}
 .navbar_head{
     /* background-color: rgb(21, 119, 206); */
     height: 10px;
@@ -43,7 +51,7 @@
     height: 50px;
 }
 #navbarSupportedContent{
-    margin-left: 750px;
+    margin-left: 785px;
     color: white !important;
 }
 .nav-link,.nav-item{

@@ -4,8 +4,15 @@ import './signin.css'
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from 'yup'
 import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
+import { showOrHideLoader } from '../../redux/loaderSlice'
+import { useState } from 'react'
+import Loader from '../Loader/Loader'
+
 
 const UserSignup = ({ setAuth }) => {
+  const dispatch = useDispatch();
+  const loading = useSelector((state) => state.loading.showloader);
 
   const schema = yup.object({
     firstName: yup.string().required('First Name is required'),
@@ -19,16 +26,19 @@ const UserSignup = ({ setAuth }) => {
   const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) })
 
   const onsubmit = async (data) => {
+    dispatch(showOrHideLoader(true))
     try {
-      const signup = await axios.post('https://projectbe-hqct.onrender.com/signup', data,{
+      const signup = await axios.post('https://projectbe-hqct.onrender.com/signup', data, {
         headers: {
-            'Content-Type': 'application/json',
+          'Content-Type': 'application/json',
         }
-    })
+      })
       // const signup = await axios.post('https://projectbe-hqct.onrender.com/signup', data)
 
       console.log(signup.data.message);
-      if(signup.data.message==='User created successfully'){
+      if (signup.data.message === 'User created successfully') {
+        dispatch(showOrHideLoader(false))
+
         alert("account created successfully ")
         setAuth('signin')
       }
@@ -36,14 +46,16 @@ const UserSignup = ({ setAuth }) => {
       console.log(error.response.data);
       alert(error.response.data)
     }
-     
-    
+
+
 
     console.log(data)
   }
 
   return (
+
     <div className='d-flex flex-column shadow-lg px-md-2 px-sm-1 text-center py-2'>
+      {loading && <Loader />}
       <form onSubmit={handleSubmit(onsubmit)} className='form d-flex flex-column justify-content-center align-items-center px-3 gap-1'>
         <h1 className='form-header'>Sign up</h1>
 
@@ -67,7 +79,7 @@ const UserSignup = ({ setAuth }) => {
 
         <input className='text-uppercase mt-2 bt' type="submit" />
       </form>
-      <span className='' onClick={() => setAuth('signin')}>Already Have An Account</span>
+      <span className='mt-2' onClick={() => setAuth('signin')}>Already Have An Account</span>
     </div>
   )
 }
