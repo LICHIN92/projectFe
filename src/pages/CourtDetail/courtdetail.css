@@ -177,13 +177,12 @@
     display: flex;
     justify-content: start;
     align-items: center;
-    
 }
 .court-amenities-box img{
-    width: 40px;
+    width: 35px;
 }
 .court-amenities-box small{
-    font-size: 1rem;
+    font-size: 0.96rem;
 }
 
 .sports-available {

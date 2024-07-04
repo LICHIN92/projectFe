@@ -17,7 +17,7 @@ import Mycourt from './components/mycourt/Mycourt.jsx';
 import AdminDashboars from './components/dashboard/admindashboard/AdminDashboars.jsx';
 import Userdashboard from './components/dashboard/userDashboars/Userdashboard.jsx';
 import Adminprotect from './components/protectedRoutes/Adminprotect.jsx';
-import Loader from './components/Loader/Loader.jsx';
+import Editcourt from './components/editCourt/Editcourt.jsx';
 
 const router = createBrowserRouter([
   {
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
     element: (
       <Authprotect>
         <AuthPage />
-        {/* <Loader/> */}
+        {/* <Editcourt/> */}
       </Authprotect>
     )
   },

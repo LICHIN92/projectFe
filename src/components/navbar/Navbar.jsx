@@ -120,16 +120,16 @@ const Navbar = () => {
 
     return (
         <nav className="header navbar navbar-expand-lg ">
-            <div className="container-fluid">
+            <div className="container-fluid ">
                 <div>
-                <Link className="navbar-brand" to="#">
-                    <h1 className='navbar_head'>
-                        turf_hub
-                        <small className='navbar_head-small'>Get on the field faster</small>
-                    </h1>
-                </Link>
+                    <Link className="navbar-brand" to="#">
+                        <h1 className='navbar_head'>
+                            turf_hub
+                            <small className='navbar_head-small'>Get on the field faster</small>
+                        </h1>
+                    </Link>
                 </div>
-                
+
                 <button
                     className="navbar-toggler "
                     type="button"

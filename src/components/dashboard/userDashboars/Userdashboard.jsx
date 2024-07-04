@@ -127,11 +127,11 @@ const Userdashboard = () => {
                     </span>
                 </div>
                 <div className={options ? 'visible' : 'hidden'}>
-                    <li onClick={() =>{ setdashlist(0),toggleSidebar()}}>Dashboard</li>
-                    <li onClick={() => { setdashlist(1),toggleSidebar()}}>View Courts</li>
-                    <li onClick={() => { setdashlist(2),toggleSidebar()}}>Edit Account</li>
-                    <li onClick={() => { setdashlist(2),toggleSidebar()}}>Delete Account</li>
-                    <li onClick={() => { setdashlist(4),toggleSidebar()}}>Contact</li>
+                    <li onClick={() => { setdashlist(0), toggleSidebar() }}>Dashboard</li>
+                    <li onClick={() => { setdashlist(1), toggleSidebar() }}>View Courts</li>
+                    <li onClick={() => { setdashlist(2), toggleSidebar() }}>Edit Account</li>
+                    <li onClick={() => { setdashlist(2), toggleSidebar() }}>Delete Account</li>
+                    <li onClick={() => { setdashlist(4), toggleSidebar() }}>Contact</li>
                 </div>
             </div>
 
@@ -252,9 +252,17 @@ const Userdashboard = () => {
                         <h2 className='text-capitalize text-info text-'>contact </h2>
                         <div className='contact-box'>
                             <div className='d-flex gap-3 justify-content-center'>
-                                <img src={mail} alt="email" />
-                                <img src={insta} alt="instagram" onClick={() => window.open('https://www.instagram.com/lichinchandran92/', '_blank')} />
-                                <img src={fb} alt="facebook" />
+                                <abbr title="contact via Email">
+                                    <img src={mail} alt="email" />
+                                </abbr>
+                                <abbr title="follow in instagram">
+                                    <img src={insta} alt="instagram" onClick={() => window.open('https://www.instagram.com/lichinchandran92/', '_blank')} />
+
+                                </abbr>
+                                <abbr title="follow in facebook">
+                                    <img src={fb} alt="facebook" />
+
+                                </abbr>
                             </div>
                             <div className='d-flex flex-column py-3 gap-3 '>
                                 <div className='xx' >

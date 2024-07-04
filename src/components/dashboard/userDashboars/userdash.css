@@ -282,6 +282,10 @@
     .sidebar {
         padding: 0;
     }
+    .quill{
+        width: 90%;
+        
+    }
 }
 
 @media(max-width:550px) {

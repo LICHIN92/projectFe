@@ -19,6 +19,7 @@ import {
     AlertDescription,
     Stack,
 } from '@chakra-ui/react'
+import Editcourt from '../editCourt/Editcourt';
 
 const Mycourt = () => {
     const { user } = useSelector(state => state.user)
@@ -35,6 +36,8 @@ const Mycourt = () => {
     const [opentime, SetOpentime] = useState(false)
     const [selectedSlots, setSelectedSlots] = useState([])
     const [alertbox, setAlertbox] = useState(null)
+    const [editcourt, seteditcourt] = useState(false)
+    const [editingcourt,setEditingCourt]=useState([])
 
     const modalStartfunction = (court) => {
         setSelectedCourt(court)
@@ -91,7 +94,7 @@ const Mycourt = () => {
         console.log(DateRangeState);
         const token = sessionStorage.getItem('token')
         if (DateRangeState.startDate) {
-            if (selectedSlots.length>0) {
+            if (selectedSlots.length > 0) {
                 try {
                     const createSlot = await axios.post(`https://projectbe-hqct.onrender.com/Slot/${court._id}`,
                         {
@@ -120,14 +123,20 @@ const Mycourt = () => {
             } else {
                 alert('Please Select Slot')
             }
-        }else{
+        } else {
             alert('pleade select Date')
         }
 
     }
+    const editcourtfunction=(court)=>{
+        console.log(court);
+        seteditcourt(true)
+        setEditingCourt(court)
+        console.log(editingcourt);
+    }
     return (
         <div>
-            <h1>My Court</h1>
+            <h1 className='ms-2 font-italic'>My Court</h1>
             {alertbox && (
                 <Stack spacing={3} mb={4}>
                     <Alert status={alertbox.status} variant='subtle'>
@@ -137,7 +146,7 @@ const Mycourt = () => {
                     </Alert>
                 </Stack>
             )}
-            <div className='d-flex flex-wrap gap-3 px-3'>
+            <div className='d-flex justify-content-center flex-wrap gap-lg-5 gap-md-4 gap-2 px-2 pb-3'>
 
                 {MyCourt && MyCourt.length > 0 ? (
                     MyCourt.map(court => (
@@ -149,7 +158,12 @@ const Mycourt = () => {
                             <Card.Body>
                                 <Card.Title>{court.CourtName}</Card.Title>
                                 <Card.Text>{court.Location}</Card.Text>
-                                <Button variant="primary" onClick={() => modalStartfunction(court)}>Add Slot</Button>
+                                <div className='d-flex gap-2 flex-wrap'>
+                                    <Button variant="primary" onClick={() => modalStartfunction(court)}>Add Slot</Button>
+                                    <Button variant="info text-white" onClick={() => editcourtfunction(court) }>Edit Court</Button>
+                                </div>
+
+
                             </Card.Body>
                         </Card>
                     ))
@@ -220,6 +234,9 @@ const Mycourt = () => {
                     <button className='btn btn-info' onClick={() => CreateShedule(selectedCourt)}>Create</button>
                 </div>
             </Modal>}
+            {/* {editcourt && <Editcourt court={editingcourt} seteditcourt={seteditcourt}> */}
+            {editcourt && <Editcourt court={editingcourt} seteditcourt={seteditcourt} />}        
+            {/* </Editcourt>} */}
         </div>
     )
 }
