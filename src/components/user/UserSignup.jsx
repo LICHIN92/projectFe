@@ -79,7 +79,7 @@ const UserSignup = ({ setAuth }) => {
 
         <input className='text-uppercase mt-2 bt' type="submit" />
       </form>
-      <span className='mt-2' onClick={() => setAuth('signin')}>Already Have An Account</span>
+      <span className='mt-2 forget_password' onClick={() => setAuth('signin')}>Already Have An Account</span>
     </div>
   )
 }

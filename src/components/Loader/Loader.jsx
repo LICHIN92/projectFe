@@ -6,7 +6,7 @@ const Loader = () => {
     <div className='loader-container'>
         <div className="loaderbox">
             <img src={loader} alt="" />
-            <h5>Loading <span>...</span></h5>
+            <h5 className='text-white'>Loading <span>...</span></h5>
         </div>
 
     </div>

@@ -45,6 +45,9 @@ button {
 .form-header{
     font-size: 20px;
 }
+.forget_password{
+    cursor: pointer;
+}
 @media(max-width:365px){
     input {
         width:290px;

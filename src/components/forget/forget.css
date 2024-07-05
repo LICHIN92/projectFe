@@ -1,0 +1,64 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.forget-container {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    background-color: rgb(0, 0, 31, .8);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.label-box {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 8px;
+}
+.label-box input{
+    color: rgb(5, 5, 190);
+    border: none;
+    font-style: italic;
+}
+
+label {
+    text-transform: capitalize;
+}
+
+.Change_Password {
+    background-color: rgba(7, 59, 7);
+    margin-bottom: 10px;
+    color: wheat;
+}
+
+.formBox {
+    /* background-color: rgb(5, 64, 119); */
+    background-color: #153448;
+    padding: 15px;
+    padding-block: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.formBox h2{
+    color:#50a2da;
+    font-style: italic;
+}
+.formBox p{
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+}
+@media(max-width:370px){
+    .label-box input{
+        width: 100%;
+    }
+    .label-box{
+        padding-inline:0;
+    }
+}

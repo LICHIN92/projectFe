@@ -4,12 +4,16 @@ import './AuthPage.css'
 import imgg from '../../assets/turf.avif'
 import logo from '../../assets/logo.png'
 import UserSignup from '../../components/user/UserSignup'
+import Forget from '../../components/forget/Forget'
 
 const AuthPage = () => {
     const [auth, setAuth] = useState('signin')
+    const[forget,setforget]=useState(false)
     return (
         
         <div className='auth_parent pb-3'>
+                   {forget && <Forget setforget={setforget}/>}
+
             <div className='logo'>
                 <h1>turf_hub
                 <small className='h1small'>Get on the field faster</small>
@@ -29,8 +33,7 @@ const AuthPage = () => {
                     <h2 className='fs-3'>Where champions come to play</h2>
                 </div>
                 <div className='auth col-12 col-md-6'>
-                    {auth == 'signin' ? <UserSignin setAuth={setAuth} /> : <UserSignup setAuth={setAuth} />}
-
+                    {auth == 'signin' ? <UserSignin setAuth={setAuth} setforget={setforget}/> : <UserSignup setAuth={setAuth} />}
                 </div>
             </div>
         </div>
