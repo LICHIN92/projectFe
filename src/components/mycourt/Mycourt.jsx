@@ -70,8 +70,8 @@ const Mycourt = () => {
         const getMyCourt = async () => {
             try {
                 if (user && user._id) {
-                    const mycourt = await axios.get(`https://new-be-u7li.onrender.com/court/mycourt/${user._id}`)
-                    // const mycourt = await axios.get(`https://new-be-u7li.onrender.com/court/mycourt/${user._id}`)
+                    const mycourt = await axios.get(`https://projectbe-hqct.onrender.com/court/mycourt/${user._id}`)
+                    // const mycourt = await axios.get(`https://projectbe-hqct.onrender.com/court/mycourt/${user._id}`)
 
                     console.log(mycourt);
                     await setMyCourt(mycourt.data)
@@ -96,7 +96,7 @@ const Mycourt = () => {
         if (DateRangeState.startDate) {
             if (selectedSlots.length > 0) {
                 try {
-                    const createSlot = await axios.post(`https://new-be-u7li.onrender.com/Slot/${court._id}`,
+                    const createSlot = await axios.post(`https://projectbe-hqct.onrender.com/Slot/${court._id}`,
                         {
                             startDate: DateRangeState.startDate,
                             endDate: DateRangeState.endDate,

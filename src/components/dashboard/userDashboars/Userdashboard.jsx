@@ -55,8 +55,8 @@ const Userdashboard = () => {
     const { register, handleSubmit } = useForm({ resolver: yupResolver(schema) });
     useEffect(() => {
         const loadingfunction = async () => {
-            // const courts = await axios.get('https://new-be-u7li.onrender.com/court')
-            const courts = await axios.get('https://new-be-u7li.onrender.com/court')
+            // const courts = await axios.get('https://projectbe-hqct.onrender.com/court')
+            const courts = await axios.get('https://projectbe-hqct.onrender.com/court')
 
             setCourtNumber(courts.data.length)
         }
@@ -69,7 +69,7 @@ const Userdashboard = () => {
     }
     const deleteFunction = async (id) => {
         try {
-            const deleting = await axios.delete(`https://new-be-u7li.onrender.com/delete/${id}`);
+            const deleting = await axios.delete(`https://projectbe-hqct.onrender.com/delete/${id}`);
 
             setAlert({
                 status: 'success',
@@ -94,7 +94,7 @@ const Userdashboard = () => {
         console.log(data);
         try {
             const token = sessionStorage.getItem('token');
-            const edit = await axios.patch(`https://new-be-u7li.onrender.com/updates/${id}`, data, {
+            const edit = await axios.patch(`https://projectbe-hqct.onrender.com/updates/${id}`, data, {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }

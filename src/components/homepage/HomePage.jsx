@@ -8,7 +8,7 @@ const HomePage = () => {
     useEffect(() => {
         const courtdata = async () => {
             try {
-                const court = await axios.get('https://new-be-u7li.onrender.com/court')
+                const court = await axios.get('https://projectbe-hqct.onrender.com/court')
                 
                 
 
@@ -22,8 +22,8 @@ const HomePage = () => {
     }, [])
     const navigate=useNavigate()
     const courtdetails=async (id)=>{
-        const courtItem=await axios.get(`https://new-be-u7li.onrender.com/court/singleCourt/${id}`)
-        // const courtItem=await axios.get(`https://new-be-u7li.onrender.com/court/singleCourt/${id}`)
+        const courtItem=await axios.get(`https://projectbe-hqct.onrender.com/court/singleCourt/${id}`)
+        // const courtItem=await axios.get(`https://projectbe-hqct.onrender.com/court/singleCourt/${id}`)
 
         console.log(courtItem);
         navigate(`/court/${id}`,{ state: { court: courtItem.data } })

@@ -28,12 +28,12 @@ const UserSignup = ({ setAuth }) => {
   const onsubmit = async (data) => {
     // dispatch(showOrHideLoader(true))
     try {
-      const signup = await axios.post('https://new-be-u7li.onrender.com/signup', data, {
+      const signup = await axios.post('https://projectbe-hqct.onrender.com/signup', data, {
         headers: {
           'Content-Type': 'application/json',
         }
       })
-      // const signup = await axios.post('https://new-be-u7li.onrender.com/signup', data)
+      // const signup = await axios.post('https://projectbe-hqct.onrender.com/signup', data)
 
       console.log(signup.data.message);
       if (signup.data.message === 'User created successfully') {
