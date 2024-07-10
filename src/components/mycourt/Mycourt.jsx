@@ -200,7 +200,7 @@ const Mycourt = () => {
 
                 {openCalendar && (
                     <div className='calender-box'>
-                        <DateRange
+                        <DateRange 
                             editableDateInputs={true}
                             onChange={item => setDateRangeState(item.selection)}
                             moveRangeOnFirstSelection={false}

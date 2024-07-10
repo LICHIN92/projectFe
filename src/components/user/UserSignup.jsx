@@ -7,13 +7,10 @@ import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { showOrHideLoader } from '../../redux/loaderSlice'
 import { useState } from 'react'
-// import Loader from '../Loader/Loader'
 
 
 const UserSignup = ({ setAuth }) => {
-  // const dispatch = useDispatch();
-  // const loading = useSelector((state) => state.loading.showloader);
-
+ 
   const schema = yup.object({
     firstName: yup.string().required('First Name is required'),
     lastName: yup.string().required('Last Name is required'),
@@ -26,7 +23,6 @@ const UserSignup = ({ setAuth }) => {
   const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) })
 
   const onsubmit = async (data) => {
-    // dispatch(showOrHideLoader(true))
     try {
       const signup = await axios.post('https://projectbe-hqct.onrender.com/signup', data, {
         headers: {
@@ -37,7 +33,6 @@ const UserSignup = ({ setAuth }) => {
 
       console.log(signup.data.message);
       if (signup.data.message === 'User created successfully') {
-        // dispatch(showOrHideLoader(false))
 
         alert("account created successfully ")
         setAuth('signin')

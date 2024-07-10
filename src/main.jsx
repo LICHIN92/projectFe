@@ -18,6 +18,7 @@ import AdminDashboars from './components/dashboard/admindashboard/AdminDashboars
 import Userdashboard from './components/dashboard/userDashboars/Userdashboard.jsx';
 import Adminprotect from './components/protectedRoutes/Adminprotect.jsx';
 import Editcourt from './components/editCourt/Editcourt.jsx';
+import MyBook from './components/MyBooking/MyBook.jsx';
 
 const router = createBrowserRouter([
   {
@@ -70,6 +71,10 @@ const router = createBrowserRouter([
         element:
           <AddCourt />
 
+      },
+      {
+        path:'/mybookings',
+        element:<MyBook/>
       }
     ])
 

@@ -1,0 +1,21 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+.mybook-container{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    /* padding: 5px; */
+}
+.booking_container{
+    min-width: 350px;
+    border: 2px  solid rgb(255, 0, 0,0.8);
+    height: auto;
+    background-color: rgb(184, 181, 181);
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+}

@@ -174,7 +174,7 @@ const Navbar = () => {
                             </Link>
                             <ul className="dropdown-menu">
                                 <li>
-                                    <Link className="dropdown-item" to="/">
+                                    <Link className="dropdown-item" to="/mybookings">
                                         My_Booking
                                     </Link>
                                 </li>
@@ -189,11 +189,11 @@ const Navbar = () => {
                                 <li>
                                     <hr className="dropdown-divider" />
                                 </li>
-                                <li>
+                                {/* <li>
                                     <Link className="dropdown-item" to="#">
                                         Something else here
                                     </Link>
-                                </li>
+                                </li> */}
                             </ul>
                         </li>
                         <li className="nav-item ">
