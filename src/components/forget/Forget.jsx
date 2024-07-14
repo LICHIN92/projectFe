@@ -23,12 +23,18 @@ const Forget = ({ email, setforget }) => {
             try {
                 const result = await axios.patch('https://projectbe-hqct.onrender.com/changePassword', data)
                 console.log(result.data);
-                setTimeout(() => { setLoader(false) }, 3000);
+                setTimeout(() => {
+                    setLoader(false)
+                    alert(result.data)
+                    setforget(false)
+                }, 3000);
+
             } catch (error) {
-                setTimeout(() => { setLoader(false),
+                setTimeout(() => {
+                    setLoader(false),
                     alert(error.response.data)
 
-                 }, 3000);
+                }, 3000);
 
             }
         }
@@ -38,7 +44,7 @@ const Forget = ({ email, setforget }) => {
         <div className='forget-container '>
             {loader ? <Loader /> :
                 <div className='formBox'>
-                    <h2 className='text-center'>Forget Passoword</h2>
+                    <h2 className='text-center'>Forget Password</h2>
                     <form onSubmit={handleSubmit(changePassword)}>
                         <div className='label-box'>
                             <label htmlFor="">Enter your Email</label>

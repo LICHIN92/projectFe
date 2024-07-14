@@ -344,8 +344,17 @@
     .box input {
         margin: 0;
     }
+    .quill{
+        width: 90%;
+        
+    }
+   
 }
-
+@media (max-width:440px){
+    .deletebox{
+        position: absolute;
+    }
+}
 @media(max-width:254px) {
     .user-card-img {
         position: relative;

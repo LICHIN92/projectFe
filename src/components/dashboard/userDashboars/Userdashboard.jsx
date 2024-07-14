@@ -130,7 +130,7 @@ const Userdashboard = () => {
                     <li onClick={() => { setdashlist(0), toggleSidebar() }}>Dashboard</li>
                     <li onClick={() => { setdashlist(1), toggleSidebar() }}>View Courts</li>
                     <li onClick={() => { setdashlist(2), toggleSidebar() }}>Edit Account</li>
-                    <li onClick={() => { setdashlist(2), toggleSidebar() }}>Delete Account</li>
+                    <li onClick={() => { setdashlist(3), toggleSidebar() }}>Delete Account</li>
                     <li onClick={() => { setdashlist(4), toggleSidebar() }}>Contact</li>
                 </div>
             </div>
