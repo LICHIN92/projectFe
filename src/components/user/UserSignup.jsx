@@ -40,7 +40,7 @@ const UserSignup = ({ setAuth, setloader }) => {
           alert("account created successfully ")
           setAuth('signin')
           setloader(false)
-        }, 3000);
+        }, 1000);
 
       }
     } catch (error) {
@@ -49,7 +49,7 @@ const UserSignup = ({ setAuth, setloader }) => {
       setTimeout(() => {
         alert(error.response.data)
         setloader(false)
-      }, 3000);
+      }, 2000);
     }
 
 

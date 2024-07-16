@@ -51,7 +51,7 @@ const UserSignin = ({ setAuth, setforget, setloader }) => {
                 alert(error.response.data)
                 setloader(false)
 
-            }, 3000);
+            }, 200);
 
         }
     }
@@ -66,7 +66,7 @@ const UserSignin = ({ setAuth, setforget, setloader }) => {
                 <input type="password" {...register("password", { required: true })} placeholder='Password' />
                 {errors.password && <span className=' text-danger '>Password feild is required</span>}
                 <input className='text-uppercase mt-3 bt' type="submit" />
-                <span className='forget_password' onClick={() => setforget(true)}>Forget Password</span>
+                <span className='forget_password' onClick={() => setforget(true)}>Forgot Password?</span>
             </form>
             <hr style={{ color: "white", width: '100%' }} />
             <button onClick={() => setAuth('signup')}>Create new account</button>

@@ -44,7 +44,7 @@ const Forget = ({ email, setforget }) => {
         <div className='forget-container '>
             {loader ? <Loader /> :
                 <div className='formBox'>
-                    <h2 className='text-center'>Forget Password</h2>
+                    <h2 className='text-center'>Forgot Password</h2>
                     <form onSubmit={handleSubmit(changePassword)}>
                         <div className='label-box'>
                             <label htmlFor="">Enter your Email</label>
