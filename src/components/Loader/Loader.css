@@ -2,9 +2,11 @@
     display: flex;
     justify-content: center;
     height: 100vh;
+    position: fixed;
+    z-index: 100;
     width: 100vw;
     align-items: center;
-    background-color: rgb(0, 0, 0, .1);
+    background-color: rgb(0, 0, 0, .8);
 }
 
 .loaderbox {
@@ -21,7 +23,7 @@
 
 .loaderbox img {
     width: 50px;
-    animation: spinner 3s linear infinite;
+    animation: spinner 1.5s linear infinite;
 }
 
 .loaderbox span {
@@ -44,7 +46,6 @@
     0% {
         transform: scaleX(0);
         color: antiquewhite;
-        /* font-size: .1rem; */
     }
     50% {
         transform: scaleX(1.2);

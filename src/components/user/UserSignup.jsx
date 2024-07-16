@@ -9,8 +9,8 @@ import { showOrHideLoader } from '../../redux/loaderSlice'
 import { useState } from 'react'
 
 
-const UserSignup = ({ setAuth }) => {
- 
+const UserSignup = ({ setAuth, setloader }) => {
+
   const schema = yup.object({
     firstName: yup.string().required('First Name is required'),
     lastName: yup.string().required('Last Name is required'),
@@ -23,28 +23,37 @@ const UserSignup = ({ setAuth }) => {
   const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) })
 
   const onsubmit = async (data) => {
+    console.log(data)
+
+    setloader(true)
     try {
       const signup = await axios.post('https://projectbe-hqct.onrender.com/signup', data, {
         headers: {
           'Content-Type': 'application/json',
         }
       })
-      // const signup = await axios.post('https://projectbe-hqct.onrender.com/signup', data)
 
       console.log(signup.data.message);
       if (signup.data.message === 'User created successfully') {
 
-        alert("account created successfully ")
-        setAuth('signin')
+        setTimeout(() => {
+          alert("account created successfully ")
+          setAuth('signin')
+          setloader(false)
+        }, 3000);
+
       }
     } catch (error) {
       console.log(error.response.data);
-      alert(error.response.data)
+      console.log(error.response.data);
+      setTimeout(() => {
+        alert(error.response.data)
+        setloader(false)
+      }, 3000);
     }
 
 
 
-    console.log(data)
   }
 
   return (
