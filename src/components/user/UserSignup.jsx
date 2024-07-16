@@ -27,7 +27,7 @@ const UserSignup = ({ setAuth, setloader }) => {
 
     setloader(true)
     try {
-      const signup = await axios.post('https://projectbe-hqct.onrender.com/signup', data, {
+      const signup = await axios.post('https://newbackend-176c.onrender.com/signup', data, {
         headers: {
           'Content-Type': 'application/json',
         }

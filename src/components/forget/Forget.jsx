@@ -21,7 +21,7 @@ const Forget = ({ email, setforget }) => {
         if (data.New_Password === data.confirm_Password) {
             setLoader(true)
             try {
-                const result = await axios.patch('https://projectbe-hqct.onrender.com/changePassword', data)
+                const result = await axios.patch('https://newbackend-176c.onrender.com/changePassword', data)
                 console.log(result.data);
                 setTimeout(() => {
                     setLoader(false)

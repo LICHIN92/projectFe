@@ -15,7 +15,7 @@
 //     useEffect(() => {
 //         const fetchBookings = async () => {
 //             try {
-//                 const { data } = await axios.get(`https://projectbe-hqct.onrender.com/Order/myorder/${id}`);
+//                 const { data } = await axios.get(`https://newbackend-176c.onrender.com/Order/myorder/${id}`);
 //                 setBooking(data);
 //                 console.log(data);
 //             } catch (error) {
@@ -126,7 +126,7 @@ const MyBook = () => {
     useEffect(() => {
         const fetchBookings = async () => {
             try {
-                const { data } = await axios.get(`https://projectbe-hqct.onrender.com/Order/myorder/${id}`);
+                const { data } = await axios.get(`https://newbackend-176c.onrender.com/Order/myorder/${id}`);
 
                 // Sort bookings by date in descending order
                 const sortedData = data.sort((a, b) => new Date(b.date) - new Date(a.date));

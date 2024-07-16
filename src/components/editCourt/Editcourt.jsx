@@ -24,7 +24,7 @@ const Editcourt = ({ seteditcourt, court }) => {
         e.preventDefault();
         console.log(formData);
         try {
-             const upload=await axios.patch(`https://projectbe-hqct.onrender.com/court/${id}`,formData)
+             const upload=await axios.patch(`https://newbackend-176c.onrender.com/court/${id}`,formData)
              console.log(upload);
              alert(upload.data.message)
              seteditcourt(false)

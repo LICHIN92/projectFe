@@ -44,7 +44,7 @@ const CourtDetail = () => {
   const fetchSlotData = async () => {
     const Id = court._id;
     try {
-      const response = await axios.get('https://projectbe-hqct.onrender.com/Slot/', {
+      const response = await axios.get('https://newbackend-176c.onrender.com/Slot/', {
         params: {
           date: selectedDate,
           id: Id
@@ -114,7 +114,7 @@ const CourtDetail = () => {
   //     }
 
   //     const slotIds = selectedSlots.map((ele) => ele._id);
-  //     const orderResponse = await axios.post('https://projectbe-hqct.onrender.com/Order', {
+  //     const orderResponse = await axios.post('https://newbackend-176c.onrender.com/Order', {
   //       amount: price,
   //       currency: 'INR',
   //       slotId: slotIds,
@@ -151,7 +151,7 @@ const CourtDetail = () => {
   //           date: selectedDate
   //         };
   //         try {
-  //           const result = await axios.post('https://projectbe-hqct.onrender.com/Order/verify', data, {
+  //           const result = await axios.post('https://newbackend-176c.onrender.com/Order/verify', data, {
   //             headers: {
   //               "Authorization": `Bearer ${token}`
   //             }
@@ -211,7 +211,7 @@ const CourtDetail = () => {
   
       const slotIds = selectedSlots.map((ele) => ele._id);
       try {
-        const orderResponse = await axios.post('https://projectbe-hqct.onrender.com/Order', {
+        const orderResponse = await axios.post('https://newbackend-176c.onrender.com/Order', {
           amount: price,
           currency: 'INR',
           slotId: slotIds,
@@ -250,7 +250,7 @@ const CourtDetail = () => {
               date: selectedDate
             };
             try {
-              const result = await axios.post('https://projectbe-hqct.onrender.com/Order/verify', data, {
+              const result = await axios.post('https://newbackend-176c.onrender.com/Order/verify', data, {
                 headers: {
                   "Authorization": `Bearer ${token}`
                 }
