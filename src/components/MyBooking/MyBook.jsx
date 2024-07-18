@@ -145,7 +145,7 @@ const MyBook = () => {
         console.log(dateString);
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
         const date = new Date(dateString);
-        date.setDate(date.getDate()+1 );
+        date.setDate(date.getDate());
         return date.toLocaleDateString(undefined, options);
     };
 
