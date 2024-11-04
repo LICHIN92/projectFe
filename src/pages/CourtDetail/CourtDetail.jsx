@@ -43,7 +43,7 @@ const CourtDetail = () => {
 
   const fetchSlotData = async () => {
     const Id = court._id;
-    try {
+    try {         
       const response = await axios.get('https://newbackend-176c.onrender.com/Slot/', {
         params: {
           date: selectedDate,
