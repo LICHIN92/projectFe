@@ -215,7 +215,7 @@ const CourtDetail = () => {
           amount: price,
           currency: 'INR',
           slotId: slotIds,
-          courtId: court._id
+          courtId: court._id 
         }, {
           headers: {
             "Authorization": `Bearer ${token}`
